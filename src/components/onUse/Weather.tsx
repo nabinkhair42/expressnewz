@@ -1,62 +1,64 @@
-// src/components/Weather.tsx
 "use client";
+import { ThermometerSun, CloudSun, Sun, Cloud, Moon } from "lucide-react";
 import React, { useEffect, useState } from "react";
+import {
+  fetchWeatherDataByCity,
+  fetchWeatherDataByCoords,
+} from "@/lib/weatherApi";
 
 interface WeatherProps {
   city: string;
   defaultCity?: string;
 }
 
+const getIconForFeelsLike = (temp: number) => {
+  if (temp <= 10) return <Cloud height={14} />;
+  if (temp <= 20) return <CloudSun height={14} />;
+  if (temp <= 30) return <Sun height={14} />;
+  return <Moon height={14} />;
+};
+
 const Weather: React.FC<WeatherProps> = ({
   city,
   defaultCity = "Biratnagar",
 }) => {
   const [weather, setWeather] = useState<any>(null);
-  const [locationError, setLocationError] = useState<boolean>(false);
+  const [locationError, setLocationError] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchWeather = async (cityName: string) => {
-      try {
-        const response = await fetch(
-          `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=metric&appid=${process.env.NEXT_PUBLIC_OPENWEATHER_API_KEY}`
-        );
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        const data = await response.json();
-        if (data.cod === 200) {
-          setWeather(data);
-          setLocationError(false);
-        } else {
-          setWeather(null);
-          setLocationError(true);
-        }
-      } catch (error) {
-        console.error("Error fetching weather data:", error);
+    const fetchWeatherAndUpdate = async (cityName: string) => {
+      const weatherData = await fetchWeatherDataByCity(cityName);
+      if (weatherData) {
+        setWeather(weatherData);
+        setLocationError(null);
+      } else {
         setWeather(null);
-        setLocationError(true);
+        setLocationError("Failed to fetch weather data.");
+      }
+    };
+
+    const fetchWeatherAndUpdateByCoords = async (lat: number, lon: number) => {
+      const weatherData = await fetchWeatherDataByCoords(lat, lon);
+      if (weatherData) {
+        setWeather(weatherData);
+        setLocationError(null);
+      } else {
+        setWeather(null);
+        setLocationError("Failed to fetch weather data.");
       }
     };
 
     const handleGeolocation = (position: GeolocationPosition) => {
       const { latitude, longitude } = position.coords;
-      fetch(
-        `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=${process.env.NEXT_PUBLIC_OPENWEATHER_API_KEY}`
-      )
-        .then((response) => response.json())
-        .then((data) => {
-          if (data.cod === 200) {
-            setWeather(data);
-            setLocationError(false);
-          } else {
-            fetchWeather(defaultCity);
-          }
-        })
-        .catch(() => fetchWeather(defaultCity));
+      fetchWeatherAndUpdateByCoords(latitude, longitude);
     };
 
-    const handleGeolocationError = () => {
-      fetchWeather(defaultCity);
+    const handleGeolocationError = (error: GeolocationPositionError) => {
+      console.error("Geolocation error:", error.message);
+      setLocationError(
+        "Unable to retrieve location. Falling back to default city."
+      );
+      fetchWeatherAndUpdate(defaultCity);
     };
 
     if (navigator.geolocation) {
@@ -65,28 +67,28 @@ const Weather: React.FC<WeatherProps> = ({
         handleGeolocationError
       );
     } else {
-      fetchWeather(defaultCity);
+      setLocationError("Geolocation is not supported by this browser.");
+      fetchWeatherAndUpdate(defaultCity);
     }
   }, [city, defaultCity]);
 
   return (
-    <div className="text-center flex flex-col md:text-left">
-      {weather ? (
-        <>
-          <span className="text-lg font-semibold">
-            {weather.main.temp}°C {weather.name}
-          </span>
-          <span className="text-muted-foreground">
-            Weather: {weather.weather[0].description}
-          </span>
-        </>
-      ) : (
-        <span>
-          {locationError
-            ? "Unable to get location."
-            : "Loading weather data..."}
-        </span>
-      )}
+    <div className="flex items-center justify-center md:justify-start">
+      <div className="text-center flex flex-col md:text-left justify-start items-start">
+        {weather ? (
+          <>
+            <span className="flex gap-1 items-center text-lg font-semibold">
+              {getIconForFeelsLike(weather.main.feels_like)}{" "}
+              {weather.main.feels_like}°C {weather.name}
+            </span>
+            <span className="text-muted-foreground">
+              Actual Temperature: {weather.main.temp}°C
+            </span>
+          </>
+        ) : (
+          <span>{locationError || "Loading weather data..."}</span>
+        )}
+      </div>
     </div>
   );
 };

@@ -94,7 +94,7 @@ export default function NavigationBar() {
   ];
 
   return (
-    <Navbar onMenuOpenChange={setIsMenuOpen} className="h-20 border-b px-4">
+    <Navbar onMenuOpenChange={setIsMenuOpen} className="h-20 border-b">
       <NavbarContent>
         <NavbarMenuToggle
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
@@ -108,7 +108,7 @@ export default function NavigationBar() {
         </NavbarBrand>
       </NavbarContent>
 
-      <NavbarContent className="hidden md:flex gap-4" justify="center">
+      <NavbarContent className="hidden lg:flex gap-4" justify="center">
         {HorizontalMenu.map((item, index) => (
           <NavbarItem key={index}>
             <Link href={item.href} className="flex items-center gap-2">
