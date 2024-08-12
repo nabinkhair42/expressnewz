@@ -5,6 +5,7 @@ import NavigationBar from "@/components/onUse/NavigationBar";
 import { ThemeProvider } from "@/components/ui/theme-provider";
 import DateTemperature from "@/components/onUse/DateTemperature";
 import { Toaster } from "react-hot-toast";
+import Footer from "@/components/onUse/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -32,6 +33,7 @@ export default function RootLayout({
           <DateTemperature />
           {children}
           <Toaster position="bottom-right" />
+          <Footer/>
         </body>
       </ThemeProvider>
     </html>
