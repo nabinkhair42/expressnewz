@@ -5,7 +5,7 @@ import React from "react";
 import { Input } from "../ui/input";
 import NepaliDate from "nepali-date";
 import Weather from "./Weather";
-import { Calendar } from "lucide-react";
+import { Calendar, Search } from "lucide-react";
 
 const getEnglishDate = (): string => {
   const now = new Date();
@@ -48,7 +48,7 @@ const getNepaliDate = (): string => {
 
 const DateTemperature: React.FC = () => {
   return (
-    <div className="border-b">
+    <div className="border-b fixed w-full">
       <div className="container flex flex-col md:flex-row w-full justify-around py-4 border-b gap-4">
         <div className="flex flex-col justify-center md:justify-start">
           <span className="flex items-center md:justify-start justify-center">
@@ -63,8 +63,8 @@ const DateTemperature: React.FC = () => {
         <div className="lg:w-[400px] xl:w-[600px] md-w-[300px] flex items-center justify-center">
           <Input
             type="search"
-            placeholder="Search news"
-            className="max-w-md "
+            placeholder="Search news, articles, videos, and more..."
+            className="max-w-md h-12"
           />
         </div>
         <Weather city="Biratnagar" />
