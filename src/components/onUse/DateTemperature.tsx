@@ -1,5 +1,6 @@
+//@ts-nocheck
 import React from "react";
-import { Input } from "../ui/input";
+import { Input } from "@nextui-org/input";
 import { Search } from "lucide-react";
 import Weather from "./Weather";
 
@@ -7,20 +8,24 @@ const DateTemperature: React.FC = () => {
   return (
     <div className="border-b fixed w-full bg-background h-20 flex items-center">
       <div className="container flex w-full justify-around">
-        <Weather city="" />
-        <div className="flex items-center justify-center">
-          <div className="relative max-w-md w-full">
-            <Search
-              className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground"
-              size={20}
-            />
-            <Input
-              type="search"
-              placeholder="Search news, articles..."
-              className="pl-10 h-12 w-full border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:primary"
-            />
-          </div>
-        </div>
+        <Weather />
+        <Input
+          className="max-w-md mt-4 h-16"
+          type="text"
+          size="lg"
+          isClearable
+          labelPlacement="outside"
+          variant="bordered"
+          maxLength={20}
+          placeholder="Search for news"
+          startContent={
+            <div className="pointer-events-none flex items-center">
+              <span className="text-default-400 text-small">
+                <Search size={20} />
+              </span>
+            </div>
+          }
+        />
       </div>
     </div>
   );

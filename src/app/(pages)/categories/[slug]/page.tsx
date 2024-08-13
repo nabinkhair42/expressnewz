@@ -43,7 +43,7 @@ const BlogPost = async ({ params }: { params: { slug: string } }) => {
   const newPosts = posts.filter((p)=>p.categories.includes(slug.toLowerCase()))
   
   return (
-    <div className='mt-64'>
+    <div>
       <h1>News</h1>
       <ul className='flex flex-col gap-4 mt-4'>
         {newPosts.map(post => (

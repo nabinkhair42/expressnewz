@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
-import NavigationBar from "@/components/onUse/NavigationBar";
+import NavigationBar from "@/components/onUse/Layout/NavigationBar";
 import { ThemeProvider } from "@/components/ui/theme-provider";
 import DateTemperature from "@/components/onUse/DateTemperature";
 import { Toaster } from "react-hot-toast";
-import Footer from "@/components/onUse/Footer";
+import Footer from "@/components/onUse/Layout/Footer";
 
 const inter = Poppins({
   subsets: ["latin"],

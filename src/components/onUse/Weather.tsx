@@ -72,7 +72,7 @@ const Weather: React.FC<WeatherProps> = ({
   }, [city, defaultCity]);
 
   return (
-    <div className="flex items-center justify-center p-4 text-sm md:text-base rounded-lg shadow-md">
+    <div className="flex items-center justify-center p-4 text-sm md:text-base rounded-lg">
       <div className="text-center flex flex-col md:text-left justify-start items-start">
         {weather ? (
           <div className="flex flex-col items-center md:items-start">

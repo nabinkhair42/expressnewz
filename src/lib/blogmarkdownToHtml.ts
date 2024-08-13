@@ -1,18 +1,19 @@
 // src/lib/markdownToHtml.ts
-//@ts-nocheck
 import fs from 'fs';
 import path from 'path';
 import { remark } from 'remark';
 import html from 'remark-html';
 
-
+// Function to convert Markdown file content to HTML
 export async function markdownToHtml(filePath: string): Promise<string> {
-  try {
-    const fullPath = path.join(process.cwd(), 'src/data/news', filePath);
-    console.log(`Full path to file: ${fullPath}`);
+  const fullPath = path.join(process.cwd(), 'src/data/news', filePath);
 
-    const fileContent = await fs.promises.readFile(fullPath, 'utf8');
+  try {
+    // Check if the file exists before reading
+    await fs.promises.access(fullPath, fs.constants.F_OK);
     
+    const fileContent = await fs.promises.readFile(fullPath, 'utf8');
+
     // Process the Markdown content to HTML
     const processedContent = await remark()
       .use(html)
@@ -20,7 +21,7 @@ export async function markdownToHtml(filePath: string): Promise<string> {
 
     return processedContent.toString();
   } catch (error) {
-    console.error('Error reading file at', fullPath, ':', error);
+    console.error('Error processing file:', fullPath, error);
     throw error; // Rethrow the error to handle it upstream
   }
 }

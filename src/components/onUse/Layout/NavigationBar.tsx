@@ -25,8 +25,8 @@ import {
 } from "lucide-react";
 import toast, { Toaster } from "react-hot-toast";
 import { useTheme } from "next-themes";
-import Weather from "./Weather";
-import DateinNepali from "./NepaliDate";
+import Weather from "@/components/onUse/Weather";
+import DateinNepali from "@/components/onUse/NepaliDate";
 
 export default function NavigationBar() {
   const notify = () =>
@@ -102,7 +102,11 @@ export default function NavigationBar() {
   };
 
   return (
-    <Navbar onMenuOpenChange={setIsMenuOpen} className="h-20 border-b">
+    <Navbar
+      onMenuOpenChange={setIsMenuOpen}
+      maxWidth="full"
+      className="h-24 border-b"
+    >
       <NavbarContent>
         <NavbarMenuToggle
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
@@ -110,7 +114,9 @@ export default function NavigationBar() {
         />
         <NavbarBrand>
           <Link href="/" className="text-left">
-            <p className="font-bold text-2xl text-primary">Express Newz</p>
+            <p className="font-bold text-2xl lg:text-3xl text-primary">
+              Express Newz
+            </p>
             <span className="text-sm">Fun, Relaxed and Unbiased</span>
           </Link>
         </NavbarBrand>
@@ -133,7 +139,7 @@ export default function NavigationBar() {
         ))}
       </NavbarContent>
 
-      <NavbarContent justify="end">
+      <NavbarContent justify="end" className="ml-8">
         <NavbarItem>
           <DateinNepali />
         </NavbarItem>
