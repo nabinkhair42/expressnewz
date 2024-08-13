@@ -98,7 +98,7 @@ export default function NavigationBar() {
       <NavbarContent>
         <NavbarMenuToggle
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-          className="sm:hidden"
+          className="lg:hidden"
         />
         <NavbarBrand>
           <div className="text-left">

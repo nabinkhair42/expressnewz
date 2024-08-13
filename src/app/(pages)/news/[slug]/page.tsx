@@ -1,59 +1,74 @@
-import { FC } from 'react';
-import { notFound } from 'next/navigation';
-import { markdownToHtml } from '@/lib/markdownToHtml';
-import { Metadata } from 'next';
+// src/app/(pages)/news/[slug]/page.tsx
+import fs from "fs";
+import path from "path";
+import matter from "gray-matter";
+import { markdownToHtml } from "@/lib/Blog-markdownToHtml";
+import { notFound } from "next/navigation";
 
-interface BlogPostProps {
-  content: string;
+type Post = {
   slug: string;
-}
+  title: string;
+  date: string;
+  author: string;
+  content: string;
+};
 
-// Generate static params for SSG
-export async function generateStaticParams() {
-  // Read slugs from your file system or a data source
-  const posts = ['post1', 'post2']; // Example slugs, replace with actual data
-  return posts.map(slug => ({ slug }));
-}
-
-// Generate metadata
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}) {
   const { slug } = params;
-  if (typeof slug !== 'string') {
-    throw new Error('Slug is not defined or not a string');
+
+  if (typeof slug !== "string") {
+    throw new Error("Slug is not defined or not a string");
   }
-  
-  const filePath = `src/data/news/${slug}.md`;
+
+  const filePath = `${slug}.md`; // Use the slug to find the Markdown file
+  const fullPath = path.join("src/data/news", filePath);
+  const fileExists = fs.existsSync(fullPath);
+
+  if (!fileExists) {
+    return { title: "Post Not Found" };
+  }
+
   const content = await markdownToHtml(filePath);
-  
+
   return {
-    title: slug.replace('-', ' ').toUpperCase() + ' | My News Website',
+    title: slug.replace("-", " ").toUpperCase() + " | My Blog",
     description: content.substring(0, 150),
   };
 }
 
-// Page component
-const BlogPost: FC<{ params: { slug: string } }> = async ({ params }) => {
+const BlogPost = async ({ params }: { params: { slug: string } }) => {
   const { slug } = params;
-  if (typeof slug !== 'string') {
+
+  if (typeof slug !== "string") {
     notFound();
   }
-  
-  const filePath = `src/data/news/${slug}.md`;
-  const content = await markdownToHtml(filePath);
-  
-  if (!content) {
+
+  const filePath = `${slug}.md`;
+  const fullPath = path.join(process.cwd(), "src/data/news", filePath);
+  const fileExists = fs.existsSync(fullPath);
+
+  if (!fileExists) {
     notFound();
   }
-  
+
+  const fileContents = fs.readFileSync(fullPath, "utf8");
+  const { data, content } = matter(fileContents);
+
+  const htmlContent = await markdownToHtml(filePath);
+
   return (
-    <article className="max-w-3xl mx-auto p-4">
-      <header className="mb-8">
-        <h1 className="text-4xl font-bold mb-4">{slug.replace('-', ' ').toUpperCase()}</h1>
-      </header>
-      <section className="prose prose-lg">
-        <div dangerouslySetInnerHTML={{ __html: content }} />
-      </section>
-    </article>
+    <div>
+      <h1>{data.title}</h1>
+      <p>
+        {data.date}
+      </p>
+      <p>{data.author}</p>
+      <div dangerouslySetInnerHTML={{ __html: htmlContent }} />
+    </div>
   );
 };
 
