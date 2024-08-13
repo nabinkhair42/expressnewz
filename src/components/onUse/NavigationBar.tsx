@@ -26,7 +26,7 @@ import {
 import toast, { Toaster } from "react-hot-toast";
 import { useTheme } from "next-themes";
 import Weather from "./Weather";
-
+import DateinNepali from "./NepaliDate";
 
 export default function NavigationBar() {
   const notify = () =>
@@ -132,10 +132,11 @@ export default function NavigationBar() {
           </NavbarItem>
         ))}
       </NavbarContent>
-      <NavbarContent>
-        <Weather/>
-      </NavbarContent>
+
       <NavbarContent justify="end">
+        <NavbarItem>
+          <DateinNepali />
+        </NavbarItem>
         <NavbarItem className="hidden md:flex">
           <Button color="primary" onClick={notify}>
             Sign Up
@@ -151,6 +152,7 @@ export default function NavigationBar() {
           </Button>
         </NavbarItem>
       </NavbarContent>
+
       <NavbarMenu className="pt-8 flex flex-col gap-4">
         {menuItems.map((item, index) => (
           <NavbarMenuItem

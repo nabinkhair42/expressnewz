@@ -2,23 +2,13 @@
 import React from "react";
 import { Input } from "../ui/input";
 import NepaliDate from "nepali-date";
-import { Calendar, Search } from "lucide-react";
+import { Calendar, Search, TimerIcon } from "lucide-react";
 
-const getEnglishDate = (): string => {
-  const now = new Date();
-  const options: Intl.DateTimeFormatOptions = {
-    weekday: "long",
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  };
-  return now.toLocaleDateString("en-US", options);
-};
+import { ConvertToNepaliNumerals } from "@/components/reusable/NepaliNumerals";
 
 const getNepaliDate = (): string => {
   const now = new Date();
   const nepaliDate = new NepaliDate(now);
-
   const year = nepaliDate.getYear();
   const monthIndex = nepaliDate.getMonth();
   const day = nepaliDate.getDate();
@@ -39,19 +29,21 @@ const getNepaliDate = (): string => {
   ];
 
   const monthName = nepaliMonths[monthIndex];
-
   return `${day} ${monthName} ${year}`;
 };
 
 const DateinNepali: React.FC = () => {
   return (
-    <div className="flex flex-col justify-center md:justify-start">
-      <span className="flex items-center md:justify-start justify-center">
+    <div className="flex flex-col justify-center md:justify-start gap-2">
+      <span className="flex text-nowrap items-center">
         <Calendar height={16} />
-        {getNepaliDate()}
+        {ConvertToNepaliNumerals(getNepaliDate())}
       </span>
-      <span className="flex text-muted-foreground md:justify-start justify-center">
-        {getEnglishDate()}
+      <span className="flex text-nowrap items-center">
+        <span className="flex text-nowrap items-center">
+          <TimerIcon height={16} />
+          {ConvertToNepaliNumerals(new Date().toLocaleTimeString())}
+        </span>
       </span>
     </div>
   );

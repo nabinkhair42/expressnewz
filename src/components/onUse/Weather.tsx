@@ -5,6 +5,7 @@ import {
   fetchWeatherDataByCity,
   fetchWeatherDataByCoords,
 } from "@/lib/weatherApi";
+import { WeatherLoadingSkeleton } from "../skeletons/WeatherSkeleton";
 
 interface WeatherProps {
   city: string;
@@ -71,20 +72,23 @@ const Weather: React.FC<WeatherProps> = ({
   }, [city, defaultCity]);
 
   return (
-    <div className="flex items-center justify-center">
+    <div className="flex items-center justify-center p-4 text-sm md:text-base rounded-lg shadow-md">
       <div className="text-center flex flex-col md:text-left justify-start items-start">
         {weather ? (
-          <div className="flex flex-col justify-center">
-            <span className="flex items-center justify-center">
-              {getIconForFeelsLike(weather.main.feels_like)} {weather.main.temp}
-              °C {weather.name}
+          <div className="flex flex-col items-center md:items-start">
+            <span className="flex items-center gap-2 mb-2">
+              {getIconForFeelsLike(weather.main.feels_like)}
+              <span>{weather.main.temp}°C</span>
+              <span className="text-primary">({weather.name})</span>
             </span>
-            <span className="flex text-muted-foreground justify-center">
-              Feels Link: {weather.main.feels_like}°C
+            <span className="text-muted-foreground">
+              Feels Like: {weather.main.feels_like}°C
             </span>
           </div>
         ) : (
-          <span>{locationError || "Loading weather data..."}</span>
+          <span className="text-red-500">
+            <WeatherLoadingSkeleton />
+          </span>
         )}
       </div>
     </div>

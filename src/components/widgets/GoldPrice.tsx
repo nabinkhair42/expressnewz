@@ -8,87 +8,85 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-
 import { Divider } from "@nextui-org/react";
-import { Gold, NepaliRupee, Silver } from "@/components/icons/icons";
-import toast from "react-hot-toast";
+import { Gold, Silver } from "@/icons/icons";
 import Link from "next/link";
-import { ChartColumn } from "lucide-react";
-import { fetchMetalPrices, MetalPrices } from "@/lib/goldApi";
+import { GoldSkeleton } from "../skeletons/GoldSkeleton";
+import { ConvertToNepaliNumerals } from "@/components/reusable/NepaliNumerals";
 
-// Function to convert Arabic numerals to Nepali numerals
-const convertToNepaliNumerals = (number: number) => {
-  const arabicNumerals = "0123456789";
-  const nepaliNumerals = "०१२३४५६७८९";
-  return number
-    .toString()
-    .split("")
-    .map((digit) => {
-      const index = arabicNumerals.indexOf(digit);
-      return index !== -1 ? nepaliNumerals[index] : digit;
-    })
-    .join("");
-};
-
-const GoldPrice: React.FC = () => {
-  const [prices, setPrices] = useState<MetalPrices | null>(null);
-
-  const fetchData = async () => {
-    const data = await fetchMetalPrices();
-    if (data) {
-      setPrices(data);
-    } else {
-      toast.error("धातु मूल्यहरू प्राप्त गर्न त्रुटि");
-    }
-  };
+interface PriceData {
+  name: string;
+  price: string;
+  unit: string;
+}
+const PriceCard: React.FC = () => {
+  const [prices, setPrices] = useState<PriceData[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    fetchData();
+    const fetchPrices = async () => {
+      try {
+        const res = await fetch("/api/prices");
+        if (!res.ok) {
+          throw new Error("Failed to fetch data");
+        }
+        const data: PriceData[] = await res.json();
+        setPrices(data);
+      } catch (error) {
+        setError("Error fetching prices.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPrices();
   }, []);
 
   return (
     <div>
-      <Card className="max-w-sm">
+      <Card className="max-w-sm overflow-x-auto">
         <CardHeader>
-          <CardTitle>सुन र चाँदीको मूल्य</CardTitle>
-          <CardDescription>
+          <CardTitle className="text-md">सुन र चाँदीको मूल्य</CardTitle>
+          <CardDescription className="text-sm">
             नेपाल राष्ट्र बैंकद्वारा प्रकाशित सुन र चाँदीको मूल्य
           </CardDescription>
         </CardHeader>
         <Divider />
         <CardContent>
-          <CardDescription>
-            <div className="flex justify-between items-center hover:bg-muted p-4 rounded-lg">
-              <div className="flex items-center gap-2 text-lg">
-                <Gold className="text-yellow-500" />
-                सुनको मूल्य
-              </div>
-              <span className="text-primary font-bold text-lg">
-                {prices
-                  ? `रु. ${convertToNepaliNumerals(
-                      parseFloat(prices.goldPrice.toFixed(2))
-                    )}`
-                  : "लोड हुँदै..."}
-              </span>
-            </div>
-            <div className="flex justify-between items-center hover:bg-muted p-4 rounded-lg">
-              <div className="flex items-center gap-2 text-lg">
-                <Silver className="text-silver-500" />
-                चाँदीको मूल्य
-              </div>
-              <span className="text-primary font-bold text-lg">
-                {prices
-                  ? `रु. ${convertToNepaliNumerals(
-                      parseFloat(prices.silverPrice.toFixed(2))
-                    )}`
-                  : "लोड हुँदै..."}
-              </span>
-            </div>
+          <CardDescription className="text-sm">
+            {loading ? (
+              <GoldSkeleton />
+            ) : error ? (
+              <div className="p-4 text-red-500">{error}</div>
+            ) : prices.length > 0 ? (
+              prices.map((price, index) => (
+                <div
+                  key={index}
+                  className="flex justify-between items-center border-b"
+                >
+                  <div className="flex items-center gap-2">
+                    {price.name.includes("Gold") ? (
+                      <Gold className="text-yellow-500" />
+                    ) : price.name.includes("Silver") ? (
+                      <Silver className="text-silver-500" />
+                    ) : null}
+                    {price.name}
+                  </div>
+                  <span className="text-primary">
+                    रु. {ConvertToNepaliNumerals(parseFloat(price.price))}/
+                    {price.unit}
+                  </span>
+                </div>
+              ))
+            ) : (
+              <div className="p-4">डाटा उपलब्ध छैन</div>
+            )}
           </CardDescription>
         </CardContent>
         <Divider />
         <CardFooter className="flex justify-end">
-          <Link href="/gold-price" className="pt-4 text-primary font-bold">
+          <Link href="/gold" className="pt-4 text-primary">
             थप विवरणहरू
           </Link>
         </CardFooter>
@@ -97,4 +95,4 @@ const GoldPrice: React.FC = () => {
   );
 };
 
-export default GoldPrice;
+export default PriceCard;
