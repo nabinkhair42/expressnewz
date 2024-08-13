@@ -24,6 +24,7 @@ import {
 } from "lucide-react";
 import toast, { Toaster } from "react-hot-toast";
 import { useTheme } from "next-themes";
+
 export default function NavigationBar() {
   const notify = () =>
     toast.error(
@@ -41,32 +42,32 @@ export default function NavigationBar() {
     {
       icon: Globe,
       title: "World",
-      href: "/world",
+      href: "/categories/world",
     },
     {
       icon: BriefcaseBusiness,
       title: "Business",
-      href: "/business",
+      href: "/categories/business",
     },
     {
       icon: Smile,
       title: "Lifestyle",
-      href: "/lifestyle",
+      href: "/categories/lifestyle",
     },
     {
       icon: Trophy,
       title: "Sports",
-      href: "/sports",
+      href: "/categories/sports",
     },
     {
       icon: Tractor,
       title: "Agriculture",
-      href: "/agriculture",
+      href: "/categories/agriculture",
     },
     {
       icon: Laptop,
       title: "Technology",
-      href: "/technology",
+      href: "/categories/technology",
     },
   ];
 
@@ -78,20 +79,24 @@ export default function NavigationBar() {
     },
     {
       title: "Business",
-      href: "/business",
+      href: "/categories/business",
       icon: BriefcaseBusiness,
     },
     {
       title: "Politics",
-      href: "/politics",
+      href: "/categories/politics",
       icon: Globe,
     },
     {
       title: "Trending",
-      href: "/trending",
+      href: "/categories/trending",
       icon: Trophy,
     },
   ];
+
+  const handleLinkClick = () => {
+    setIsMenuOpen(false);
+  };
 
   return (
     <Navbar onMenuOpenChange={setIsMenuOpen} className="h-20 border-b">
@@ -111,7 +116,11 @@ export default function NavigationBar() {
       <NavbarContent className="hidden lg:flex gap-4" justify="center">
         {HorizontalMenu.map((item, index) => (
           <NavbarItem key={index}>
-            <Link href={item.href} className="flex items-center gap-2">
+            <Link
+              href={item.href}
+              className="flex items-center gap-2"
+              onClick={handleLinkClick}
+            >
               <item.icon size={20} className="text-primary" />
               <span className="font-semibold hover:text-primary transition-colors">
                 {item.title}
@@ -123,7 +132,7 @@ export default function NavigationBar() {
       <NavbarContent justify="end">
         <NavbarItem className="hidden md:flex">
           <Button color="primary" onClick={notify}>
-            Sign Up{" "}
+            Sign Up
           </Button>
         </NavbarItem>
         <NavbarItem>
@@ -142,7 +151,11 @@ export default function NavigationBar() {
             key={index}
             className="hover:bg-muted rounded-md py-2 px-4 w-48 transition-colors"
           >
-            <Link href={item.href} className="flex items-center gap-2">
+            <Link
+              href={item.href}
+              className="flex items-center gap-2"
+              onClick={handleLinkClick}
+            >
               <item.icon
                 size={24}
                 className="rounded-full bg-primary text-white w-fit h-10 p-2 aspect-square"
@@ -153,7 +166,7 @@ export default function NavigationBar() {
         ))}
         <NavbarItem className="flex md:hidden pl-4">
           <Button color="primary" onClick={notify}>
-            Sign Up{" "}
+            Sign Up
           </Button>
         </NavbarItem>
       </NavbarMenu>

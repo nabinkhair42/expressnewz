@@ -2,15 +2,13 @@
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
-import { markdownToHtml } from "@/lib/blogmarkdownToHtml";
+import { markdownToHtml } from "@/lib/categoryMarkdownToHtml";
 import { notFound } from "next/navigation";
 
 type Post = {
   slug: string;
   title: string;
-  date: string;
-  author: string;
-  content: string;
+  description: string;
 };
 
 export async function generateMetadata({
@@ -25,7 +23,7 @@ export async function generateMetadata({
   }
 
   const filePath = `${slug}.md`; // Use the slug to find the Markdown file
-  const fullPath = path.join("src/data/news", filePath);
+  const fullPath = path.join("src/data/categories", filePath);
   const fileExists = fs.existsSync(fullPath);
 
   if (!fileExists) {
@@ -48,7 +46,7 @@ const BlogPost = async ({ params }: { params: { slug: string } }) => {
   }
 
   const filePath = `${slug}.md`;
-  const fullPath = path.join(process.cwd(), "src/data/news", filePath);
+  const fullPath = path.join(process.cwd(), "src/data/categories", filePath);
   const fileExists = fs.existsSync(fullPath);
 
   if (!fileExists) {
@@ -61,13 +59,10 @@ const BlogPost = async ({ params }: { params: { slug: string } }) => {
   const htmlContent = await markdownToHtml(filePath);
 
   return (
-    <div>
+    <div className="pt-64 min-h-screen">
       <h1>{data.title}</h1>
-      <p>
-        {data.date}
-      </p>
-      <p>{data.author}</p>
-      <div dangerouslySetInnerHTML={{ __html: htmlContent }} />
+      <p>{data.date}</p>
+      <p className="text-muted-foreground">{data.description}</p>
     </div>
   );
 };
