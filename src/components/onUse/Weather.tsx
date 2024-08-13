@@ -76,15 +76,15 @@ const Weather: React.FC<WeatherProps> = ({
     <div className="flex items-center justify-center md:justify-start">
       <div className="text-center flex flex-col md:text-left justify-start items-start">
         {weather ? (
-          <>
-            <span className="flex gap-1 items-center text-lg font-semibold">
+          <div className="flex flex-col justify-center md:justify-start">
+            <span className="flex items-center md:justify-start justify-center">
               {getIconForFeelsLike(weather.main.feels_like)}{" "}
-              {weather.main.feels_like}°C {weather.name}
+              {weather.main.temp}°C {weather.name}
             </span>
-            <span className="text-muted-foreground">
-              Actual Temperature: {weather.main.temp}°C
+            <span className="flex text-muted-foreground md:justify-start justify-center">
+              Feels Link: {weather.main.feels_like}°C
             </span>
-          </>
+          </div>
         ) : (
           <span>{locationError || "Loading weather data..."}</span>
         )}

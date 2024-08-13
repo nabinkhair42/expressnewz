@@ -48,8 +48,8 @@ const getNepaliDate = (): string => {
 
 const DateTemperature: React.FC = () => {
   return (
-    <div className="border-b fixed w-full">
-      <div className="container flex flex-col md:flex-row w-full justify-around py-4 border-b gap-4">
+    <div className="border-b fixed w-full bg-background">
+      <div className="container flex flex-col md:flex-row w-full justify-around py-4 gap-4">
         <div className="flex flex-col justify-center md:justify-start">
           <span className="flex items-center md:justify-start justify-center">
             <Calendar height={16} />
@@ -60,12 +60,18 @@ const DateTemperature: React.FC = () => {
           </span>
         </div>
 
-        <div className="lg:w-[400px] xl:w-[600px] md-w-[300px] flex items-center justify-center">
-          <Input
-            type="search"
-            placeholder="Search news, articles, videos, and more..."
-            className="max-w-md h-12"
-          />
+        <div className="lg:w-[400px] xl:w-[600px] md:w-[300px] flex items-center justify-center">
+          <div className="relative max-w-md w-full">
+            <Search
+              className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted"
+              size={20}
+            />
+            <Input
+              type="search"
+              placeholder="Search news, articles..."
+              className="pl-10 h-12 w-full border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:primary"
+            />
+          </div>
         </div>
         <Weather city="Biratnagar" />
       </div>

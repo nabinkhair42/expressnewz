@@ -84,12 +84,12 @@ export default function NavigationBar() {
     {
       title: "Politics",
       href: "/politics",
-      icon: Globe, 
+      icon: Globe,
     },
     {
       title: "Trending",
       href: "/trending",
-      icon: Trophy, 
+      icon: Trophy,
     },
   ];
 
@@ -121,7 +121,7 @@ export default function NavigationBar() {
         ))}
       </NavbarContent>
       <NavbarContent justify="end">
-        <NavbarItem>
+        <NavbarItem className="hidden md:flex">
           <Button color="primary" onClick={notify}>
             Sign Up{" "}
           </Button>
@@ -151,6 +151,11 @@ export default function NavigationBar() {
             </Link>
           </NavbarMenuItem>
         ))}
+        <NavbarItem className="flex md:hidden pl-4">
+          <Button color="primary" onClick={notify}>
+            Sign Up{" "}
+          </Button>
+        </NavbarItem>
       </NavbarMenu>
     </Navbar>
   );
