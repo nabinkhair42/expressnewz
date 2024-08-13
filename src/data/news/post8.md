@@ -2,7 +2,7 @@
 title: "The Evolution of Digital Marketing Strategies"
 date: "2024-08-20"
 author: "Nina Patel"
-categories: ["Business", "Technology"]
+categories: ["business", "technology"]
 ---
 
 Digital marketing strategies are continuously evolving to keep pace with technological advancements and consumer behavior changes. Staying updated with these strategies is crucial for successful marketing campaigns.

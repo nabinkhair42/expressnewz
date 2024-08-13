@@ -2,7 +2,7 @@
 title: "Exploring the Benefits of Urban Green Spaces"
 date: "2024-08-19"
 author: "Liam O'Connor"
-categories: ["Lifestyle", "Environment"]
+categories: ["lifestyle", "environment"]
 ---
 
 Urban green spaces are vital for enhancing city life, providing numerous benefits to residents. Understanding these benefits can help promote the development and maintenance of green areas in cities.

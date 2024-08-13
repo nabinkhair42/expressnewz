@@ -1,3 +1,4 @@
+//@ts-nocheck
 "use client";
 import React from "react";
 import {
@@ -24,6 +25,8 @@ import {
 } from "lucide-react";
 import toast, { Toaster } from "react-hot-toast";
 import { useTheme } from "next-themes";
+import Weather from "./Weather";
+
 
 export default function NavigationBar() {
   const notify = () =>
@@ -128,6 +131,9 @@ export default function NavigationBar() {
             </Link>
           </NavbarItem>
         ))}
+      </NavbarContent>
+      <NavbarContent>
+        <Weather/>
       </NavbarContent>
       <NavbarContent justify="end">
         <NavbarItem className="hidden md:flex">

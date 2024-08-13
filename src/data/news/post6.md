@@ -2,7 +2,7 @@
 title: "The Impact of AI on Healthcare"
 date: "2024-08-18"
 author: "Ananya Singh"
-categories: ["Technology", "Health"]
+categories: ["technology", "health"]
 ---
 
 Artificial Intelligence is transforming healthcare by improving diagnostics, treatment plans, and patient care. The integration of AI technologies is revolutionizing the healthcare industry.

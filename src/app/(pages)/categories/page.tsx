@@ -34,7 +34,7 @@ const CategoriesPage = async () => {
   const posts = await fetchPosts();
 
   return (
-    <div className='pt-64 min-h-screen'>
+    <div className='pt-64 min-h-screen container'>
       <h1>Categories</h1>
       <ul className='flex flex-col gap-4 mt-4'>
         {posts.map(post => (

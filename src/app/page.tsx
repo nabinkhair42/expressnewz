@@ -5,7 +5,7 @@ import NewsPage from './(pages)/news/page'
 
 const page = () => {
   return (
-    <div className="min-h-screen mt-64">
+    <div className="min-h-screen mt-64 container">
       <div>
         <NewsPage />
       </div>

@@ -2,7 +2,7 @@
 title: "Advances in Renewable Energy Storage Solutions"
 date: "2024-08-17"
 author: "Rajiv Kumar"
-categories: ["Technology", "Environment"]
+categories: ["technology", "environment"]
 ---
 
 Effective energy storage is crucial for the success of renewable energy sources. Recent innovations in storage technologies are making renewable energy more reliable and accessible.

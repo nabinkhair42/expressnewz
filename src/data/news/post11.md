@@ -2,7 +2,7 @@
 title: "The Future of Electric Vehicles"
 date: "2024-08-23"
 author: "Sanjay Mehta"
-categories: ["Technology", "Environment"]
+categories: ["technology", "environment"]
 ---
 
 Electric vehicles (EVs) are becoming increasingly popular as advancements in technology make them more viable. The future of EVs promises exciting developments in automotive technology and environmental impact.

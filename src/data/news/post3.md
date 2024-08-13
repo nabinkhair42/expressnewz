@@ -2,7 +2,7 @@
 title: "The Rise of Remote Work: Trends and Predictions"
 date: "2024-08-15"
 author: "Emily Johnson"
-categories: ["Lifestyle", "Business"]
+categories: ["lifestyle", "business"]
 ---
 
 Remote work is becoming a permanent fixture in the modern workplace. Understanding the latest trends and future predictions can help businesses and employees navigate this evolving landscape.

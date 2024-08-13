@@ -55,9 +55,7 @@ const Weather: React.FC<WeatherProps> = ({
 
     const handleGeolocationError = (error: GeolocationPositionError) => {
       console.error("Geolocation error:", error.message);
-      setLocationError(
-        "Unable to retrieve location. Falling back to default city."
-      );
+      setLocationError("Falling back to default city.");
       fetchWeatherAndUpdate(defaultCity);
     };
 
@@ -73,15 +71,15 @@ const Weather: React.FC<WeatherProps> = ({
   }, [city, defaultCity]);
 
   return (
-    <div className="flex items-center justify-center md:justify-start">
+    <div className="flex items-center justify-center">
       <div className="text-center flex flex-col md:text-left justify-start items-start">
         {weather ? (
-          <div className="flex flex-col justify-center md:justify-start">
-            <span className="flex items-center md:justify-start justify-center">
-              {getIconForFeelsLike(weather.main.feels_like)}{" "}
-              {weather.main.temp}°C {weather.name}
+          <div className="flex flex-col justify-center">
+            <span className="flex items-center justify-center">
+              {getIconForFeelsLike(weather.main.feels_like)} {weather.main.temp}
+              °C {weather.name}
             </span>
-            <span className="flex text-muted-foreground md:justify-start justify-center">
+            <span className="flex text-muted-foreground justify-center">
               Feels Link: {weather.main.feels_like}°C
             </span>
           </div>
