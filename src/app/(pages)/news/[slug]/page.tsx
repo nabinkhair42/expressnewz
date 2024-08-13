@@ -16,15 +16,6 @@ type Post = {
   image: string;
 };
 
-function convertSentence(sentence: string): string {
-  return sentence
-      .toLowerCase()          // Convert the entire sentence to lowercase
-      .replace(/\s+/g, '-')   // Replace one or more spaces with a hyphen
-      .replace(/[^\w\-]+/g, '') // Remove any non-alphanumeric characters (except hyphens)
-      .replace(/--+/g, '-')   // Replace multiple hyphens with a single hyphen
-      .replace(/^-+|-+$/g, ''); // Remove leading or trailing hyphens
-}
-
 // Function to generate metadata for the page
 export async function generateMetadata({
   params,
@@ -55,6 +46,9 @@ export async function generateMetadata({
 }
 
 const BlogPost = async ({ params }: { params: { slug: string } }) => {
+
+
+
   const { slug } = params;
 
   if (typeof slug !== "string") {
@@ -62,9 +56,6 @@ const BlogPost = async ({ params }: { params: { slug: string } }) => {
   }
 
   const filePath = `${slug}.md`;
-
-  const url = convertSentence(`${slug}`);
-  console.log(url);
 
   const fullPath = path.join(process.cwd(), "src/data/news", filePath);
   const fileExists = fs.existsSync(fullPath);
