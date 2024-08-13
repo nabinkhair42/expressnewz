@@ -2,7 +2,8 @@
 title: "Exploring the Future of Urban Agriculture"
 date: "2024-08-14"
 author: "Priya Sharma"
-categories: ["Agriculture", "Lifestyle"]
+categories: ["agriculture", "lifestyle"]
+
 ---
 
 Urban agriculture is rapidly evolving, offering new opportunities for sustainable food production in city environments. Innovations in vertical farming, rooftop gardens, and hydroponics are making it easier to grow fresh produce in urban areas.

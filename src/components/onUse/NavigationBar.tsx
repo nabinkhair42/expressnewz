@@ -106,10 +106,10 @@ export default function NavigationBar() {
           className="lg:hidden"
         />
         <NavbarBrand>
-          <div className="text-left">
+          <Link href="/" className="text-left">
             <p className="font-bold text-2xl text-primary">Express Newz</p>
             <span className="text-sm">Fun, Relaxed and Unbiased</span>
-          </div>
+          </Link>
         </NavbarBrand>
       </NavbarContent>
 

@@ -9,6 +9,7 @@ type Post = {
   slug: string;
   title: string;
   date: string;
+  categories: string[];
   author: string; // Add author field
 };
 
@@ -25,6 +26,7 @@ const fetchPosts = async (): Promise<Post[]> => {
       slug: fileName.replace(/\.md$/, ''),
       title: data.title || 'Untitled',
       date: data.date || '',
+      categories: data.categories || [], // Default categories
       author: data.author || 'Express Newz', // Default author
     };
   });
@@ -44,6 +46,7 @@ const NewsPage = async () => {
             <Link href={`/news/${post.slug}`}>
               <div className='font-bold'>{post.title}</div>
               <div className='text-sm text-muted-foreground'>{post.date} - {post.author}</div>
+              <div className='text-sm text-muted-foreground'>{post.categories.join(', ')}</div>
             </Link>
           </li>
         ))}

@@ -2,7 +2,7 @@
 title: "Breakthroughs in Quantum Computing"
 date: "2024-08-14"
 author: "Amit Patel"
-categories: ["Technology", "Science"]
+categories: ["technology", "science"]
 ---
 
 Quantum computing is on the brink of revolutionizing the technology landscape. Recent breakthroughs in quantum algorithms and hardware are paving the way for faster and more powerful computational capabilities.
