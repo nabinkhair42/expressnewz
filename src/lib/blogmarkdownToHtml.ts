@@ -1,6 +1,7 @@
 // src/lib/markdownToHtml.ts
 import fs from 'fs';
 import path from 'path';
+import matter from 'gray-matter';
 import { remark } from 'remark';
 import html from 'remark-html';
 
@@ -14,10 +15,11 @@ export async function markdownToHtml(filePath: string): Promise<string> {
     
     const fileContent = await fs.promises.readFile(fullPath, 'utf8');
 
-    // Process the Markdown content to HTML
+    const { content: markdownContent } = matter(fileContent);
+
     const processedContent = await remark()
       .use(html)
-      .process(fileContent);
+      .process(markdownContent);
 
     return processedContent.toString();
   } catch (error) {

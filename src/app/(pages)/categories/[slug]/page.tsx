@@ -58,9 +58,12 @@ const BlogPost = async ({ params }: { params: { slug: string } }) => {
       <h1 className="text-xl font-bold">
         {slug.charAt(0).toUpperCase() + slug.slice(1)} News
       </h1>
-      <ul className="grid grid-cols-[repeat(auto-fit,_minmax(200px,_1fr))] gap-4">
+      <ul className="grid grid-cols-[repeat(auto-fit,_minmax(350px,_1fr))] gap-4">
         {newPosts.map((post) => (
-          <Card key={post.slug} className="hover:shadow-lg transition-shadow">
+          <Card
+            key={post.slug}
+            className="hover:shadow-lg transition-shadow w-80"
+          >
             <Link
               href={`/news/${post.slug}`}
               className="flex flex-col justify-around"

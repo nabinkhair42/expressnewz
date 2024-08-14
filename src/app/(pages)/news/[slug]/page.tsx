@@ -40,15 +40,14 @@ export async function generateMetadata({
   const { data } = matter(fileContents);
 
   return {
-    title: `${data.title || slug.replace("-", " ").toUpperCase()} | Express Newz`,
+    title: `${
+      data.title || slug.replace("-", " ").toUpperCase()
+    } | Express Newz`,
     description: data.description || "No description available.",
   };
 }
 
 const BlogPost = async ({ params }: { params: { slug: string } }) => {
-
-
-
   const { slug } = params;
 
   if (typeof slug !== "string") {
@@ -75,7 +74,7 @@ const BlogPost = async ({ params }: { params: { slug: string } }) => {
       <h1 className="text-center text-4xl md:text-6xl font-bold mb-4">
         {data.title}
       </h1>
-      
+
       {/* Metadata (Displayed) */}
       <div className="flex flex-col items-center gap-2 mb-6">
         <p className="flex items-center gap-2 text-xl">
@@ -88,7 +87,7 @@ const BlogPost = async ({ params }: { params: { slug: string } }) => {
       </div>
 
       {/* Main Image */}
-      <div className="mb-6">
+      <div className="mb-6 flex items-center justify-center">
         <Image
           src={data.image}
           className="rounded-md"
@@ -99,7 +98,10 @@ const BlogPost = async ({ params }: { params: { slug: string } }) => {
       </div>
 
       {/* Content */}
-      <div className="prose max-w-full" dangerouslySetInnerHTML={{ __html: htmlContent }} />
+      <div
+        className="prose max-w-lg mx-auto "
+        dangerouslySetInnerHTML={{ __html: htmlContent }}
+      />
     </div>
   );
 };
