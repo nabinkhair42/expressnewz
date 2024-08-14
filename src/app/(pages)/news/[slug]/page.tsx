@@ -6,6 +6,7 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import { Calendar } from "lucide-react";
 import { Avatar } from "@nextui-org/react";
+import Link from "next/link";
 
 type Post = {
   slug: string;
@@ -14,38 +15,8 @@ type Post = {
   author: string;
   content: string;
   image: string;
+  categories: string[]; // Change this to an array for multiple categories
 };
-
-// Function to generate metadata for the page
-export async function generateMetadata({
-  params,
-}: {
-  params: { slug: string };
-}) {
-  const { slug } = params;
-
-  if (typeof slug !== "string") {
-    throw new Error("Slug is not defined or not a string");
-  }
-
-  const filePath = `${slug}.md`;
-  const fullPath = path.join("src/data/news", filePath);
-  const fileExists = fs.existsSync(fullPath);
-
-  if (!fileExists) {
-    return { title: "Post Not Found" };
-  }
-
-  const fileContents = fs.readFileSync(fullPath, "utf8");
-  const { data } = matter(fileContents);
-
-  return {
-    title: `${
-      data.title || slug.replace("-", " ").toUpperCase()
-    } | Express Newz`,
-    description: data.description || "No description available.",
-  };
-}
 
 const BlogPost = async ({ params }: { params: { slug: string } }) => {
   const { slug } = params;
@@ -55,7 +26,6 @@ const BlogPost = async ({ params }: { params: { slug: string } }) => {
   }
 
   const filePath = `${slug}.md`;
-
   const fullPath = path.join(process.cwd(), "src/data/news", filePath);
   const fileExists = fs.existsSync(fullPath);
 
@@ -69,39 +39,61 @@ const BlogPost = async ({ params }: { params: { slug: string } }) => {
   const htmlContent = await markdownToHtml(filePath);
 
   return (
-    <div className="container mx-auto px-4 py-6">
-      {/* Title */}
-      <h1 className="text-center text-4xl md:text-6xl font-bold mb-4">
-        {data.title}
-      </h1>
+    <div className="mx-auto">
+      <div className="max-w-screen-xl mx-auto relative">
+        <div
+          className="bg-cover bg-center text-center overflow-hidden"
+          style={{
+            minHeight: "500px",
+            backgroundImage: `url(${data.image})`,
+          }}
+          title={data.title}
+        ></div>
+        <div className="max-w-3xl mx-auto">
+          <div className="rounded-t-md bg-background -mt-32 p-5 sm:p-10 border">
+            <h1 className="font-bold text-3xl mb-2">{data.title}</h1>
 
-      {/* Metadata (Displayed) */}
-      <div className="flex flex-col items-center gap-2 mb-6">
-        <p className="flex items-center gap-2 text-xl">
-          <Calendar size={24} /> {data.date}
-        </p>
-        <div className="flex items-center gap-2">
-          <Avatar size="md" src={data.image} isBordered={true} />
-          <p className="text-lg">{data.author}</p>
+            {/* Author Details  */}
+            <div className="font-semibold flex items-center gap-2 mt-4">
+              <Avatar
+                src={data.image}
+                alt={data.author}
+                size="sm"
+                className="inline-block ml-2"
+              />
+              <div className="flex flex-col justify-start items-start gap-1 ">
+                <p>{data.author}</p>
+                <p className="text-muted-foreground">{data.date}</p>
+              </div>
+            </div>
+
+            {/* Complete News Goes Here  */}
+
+            <p className="leading-8 text-[18px] text-justify mt-4">
+              <div
+                className="prose"
+                dangerouslySetInnerHTML={{ __html: htmlContent }}
+              />
+            </p>
+
+            {/* Categories Displayed  */}
+
+            {data.categories && data.categories.length > 0 && (
+              <div className="mt-8">
+                <div className="list-disc pl-5 flex gap-2">
+                  {data.categories.map((category: string, index: number) => (
+                    <p key={index} className="text-primary">
+                      <Link href={`/categories/${category.toLowerCase()}`}>
+                        #{category}
+                      </Link>
+                    </p>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       </div>
-
-      {/* Main Image */}
-      <div className="mb-6 flex items-center justify-center">
-        <Image
-          src={data.image}
-          className="rounded-md"
-          alt={data.title}
-          width={750}
-          height={750}
-        />
-      </div>
-
-      {/* Content */}
-      <div
-        className="prose max-w-lg mx-auto "
-        dangerouslySetInnerHTML={{ __html: htmlContent }}
-      />
     </div>
   );
 };

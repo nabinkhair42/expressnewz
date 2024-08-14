@@ -36,7 +36,7 @@ const CategoriesPage = async () => {
   return (
     <div className=''>
       <h1>Categories</h1>
-      <ul className='flex flex-col gap-4'>
+      <ul className='flex flex-col gap-4 '>
         {posts.map(post => (
           <li key={post.slug} className='border rounded-md px-4 py-4'>
             <Link href={`/categories/${post.slug}`}>
