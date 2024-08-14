@@ -7,6 +7,7 @@ import Image from "next/image";
 import { Calendar } from "lucide-react";
 import { Avatar } from "@nextui-org/react";
 import Link from "next/link";
+import { ShareMenu } from "@/components/reusable/share";
 
 type Post = {
   slug: string;
@@ -39,7 +40,7 @@ const BlogPost = async ({ params }: { params: { slug: string } }) => {
   const htmlContent = await markdownToHtml(filePath);
 
   return (
-    <div className="mx-auto">
+    <div className="mx-auto ">
       <div className="max-w-screen-xl mx-auto relative">
         <div
           className="bg-cover bg-center text-center overflow-hidden"
@@ -49,22 +50,27 @@ const BlogPost = async ({ params }: { params: { slug: string } }) => {
           }}
           title={data.title}
         ></div>
+
         <div className="max-w-3xl mx-auto">
-          <div className="rounded-t-md bg-background -mt-32 p-5 sm:p-10 border">
+          <div className="rounded-t-md bg-background -mt-32 px-5 sm:px-10 border pt-10">
             <h1 className="font-bold text-3xl mb-2">{data.title}</h1>
 
             {/* Author Details  */}
-            <div className="font-semibold flex items-center gap-2 mt-4">
-              <Avatar
-                src={data.image}
-                alt={data.author}
-                size="sm"
-                className="inline-block ml-2"
-              />
-              <div className="flex flex-col justify-start items-start gap-1 ">
-                <p>{data.author}</p>
-                <p className="text-muted-foreground">{data.date}</p>
+            <div className="flex justify-between items-center">
+              <div className="flex gap-2 items-center justify-center">
+                <Avatar
+                  src={data.image}
+                  alt={data.author}
+                  size="sm"
+                  isBordered={true}
+                  className="inline-block ml-2 border border-primary h-12 w-12"
+                />
+                <div className="flex flex-col justify-start items-start gap-1 ">
+                  <p>{data.author}</p>
+                  <p className="text-muted-foreground">{data.date}</p>
+                </div>
               </div>
+              <ShareMenu />
             </div>
 
             {/* Complete News Goes Here  */}
