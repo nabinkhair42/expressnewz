@@ -21,7 +21,7 @@ import { usePathname } from "next/navigation";
 import toast from "react-hot-toast";
 import { useTheme } from "next-themes";
 import DateinNepali from "../NepaliDate";
-import Weather from "../Weather";
+import Weather from "@/components/onUse/Weather";
 const Links = [
   {
     icon: HomeIcon,

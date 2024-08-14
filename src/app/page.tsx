@@ -1,10 +1,13 @@
-import GoldPrice from '@/components/widgets/GoldPrice'
-import RecentPost from '@/components/widgets/RecentPost'
-import React from 'react'
-import NewsPage from './(pages)/news/page'
+import GoldPrice from "@/components/widgets/GoldPrice";
+import RecentPost from "@/components/widgets/RecentPost";
+import React from "react";
+import NewsPage from "./(pages)/news/page";
+import { Carousel } from "@/components/onUse/stories"; 
+import PostList from "@/components/onUse/postList";
 const page = () => {
   return (
     <div>
+      <Carousel />
       <div>
         <NewsPage />
       </div>
@@ -14,6 +17,6 @@ const page = () => {
       </div>
     </div>
   );
-}
+};
 
-export default page
+export default page;

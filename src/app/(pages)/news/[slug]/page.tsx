@@ -15,7 +15,7 @@ type Post = {
   author: string;
   content: string;
   image: string;
-  categories: string[]; // Change this to an array for multiple categories
+  categories: string[];
 };
 
 const BlogPost = async ({ params }: { params: { slug: string } }) => {
