@@ -39,13 +39,12 @@ export const Gold: React.FC<IconsProps> = ({
   </svg>
 );
 
-
 export const Silver: React.FC<IconsProps> = ({
-  width = 100,
-  height = 100,
+  width = "100",
+  height = "100",
   ...props
 }) => (
-  <svg fill="#C0C0C0" viewBox="0 0 32 32"  height={40}>
+  <svg fill="#C0C0C0" viewBox="0 0 32 32" height={40}>
     <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
     <g
       id="SVGRepo_tracerCarrier"

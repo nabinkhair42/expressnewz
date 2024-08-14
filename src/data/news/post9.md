@@ -3,6 +3,7 @@ title: "The Role of Biotechnology in Modern Agriculture"
 date: "2024-08-21"
 author: "Aisha Khan"
 categories: ["agriculture", "science"]
+image: "/images/tech.jpg"
 ---
 
 Biotechnology is playing a significant role in modern agriculture, offering solutions to increase crop yields and resist pests. Advances in biotechnology are transforming agricultural practices.

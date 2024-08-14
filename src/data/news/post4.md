@@ -3,6 +3,7 @@ title: "Sustainable Fashion: The Future of Eco-Friendly Clothing"
 date: "2024-08-16"
 author: "Sofia Martinez"
 categories: ["lifestyle", "environment"]
+image: "/images/tea.jpg"
 ---
 
 Sustainable fashion is reshaping the clothing industry with eco-friendly practices and materials. The focus on reducing environmental impact is driving significant changes in how clothing is produced and consumed.

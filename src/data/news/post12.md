@@ -3,6 +3,7 @@ title: "The Impact of Social Media on Modern Communication"
 date: "2024-08-24"
 author: "Jasmine Reddy"
 categories: ["lifestyle", "technology"]
+image: "/images/tech.jpg"
 ---
 
 Social media has dramatically altered the way we communicate and interact. Understanding its impact can provide insights into its role in contemporary society.

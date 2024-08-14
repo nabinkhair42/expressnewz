@@ -2,6 +2,7 @@
 title: "The Rise of Remote Work: Trends and Predictions"
 date: "2024-08-15"
 author: "Emily Johnson"
+image: "/images/news.jpg"
 categories: ["lifestyle", "business"]
 ---
 

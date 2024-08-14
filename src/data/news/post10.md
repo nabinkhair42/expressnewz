@@ -3,6 +3,7 @@ title: "Understanding Cryptocurrency and Blockchain Technology"
 date: "2024-08-22"
 author: "Vikram Singh"
 categories: ["technology", "business"]
+image: "/images/tech.jpg"
 ---
 
 Cryptocurrency and blockchain technology are revolutionizing the financial sector. Understanding these technologies can provide insights into their impact on the future of finance.

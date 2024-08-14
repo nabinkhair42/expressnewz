@@ -45,7 +45,7 @@ const PriceCard: React.FC = () => {
 
   return (
     <div>
-      <Card className="max-w-sm overflow-x-auto">
+      <Card className="max-w-sm overflow-x-auto p-6">
         <CardHeader>
           <CardTitle className="text-md">सुन र चाँदीको मूल्य</CardTitle>
           <CardDescription className="text-sm">

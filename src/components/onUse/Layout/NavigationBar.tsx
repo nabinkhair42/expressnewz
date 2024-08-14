@@ -1,17 +1,5 @@
 //@ts-nocheck
 "use client";
-import React from "react";
-import {
-  Navbar,
-  NavbarBrand,
-  NavbarContent,
-  NavbarItem,
-  NavbarMenuToggle,
-  NavbarMenu,
-  NavbarMenuItem,
-} from "@nextui-org/navbar";
-import { Button } from "@nextui-org/button";
-import Link from "next/link";
 import {
   HomeIcon,
   Globe,
@@ -23,167 +11,198 @@ import {
   Sun,
   Moon,
 } from "lucide-react";
-import toast, { Toaster } from "react-hot-toast";
+import Link from "next/link";
+import React, { useState, useRef, useEffect } from "react";
+import { Button } from "@nextui-org/button";
+import { useRouter } from "next/navigation";
+import { AlignLeft, LogIn, User2, X } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { usePathname } from "next/navigation";
+import toast from "react-hot-toast";
 import { useTheme } from "next-themes";
-import Weather from "@/components/onUse/Weather";
-import DateinNepali from "@/components/onUse/NepaliDate";
-
-export default function NavigationBar() {
+import DateinNepali from "../NepaliDate";
+import Weather from "../Weather";
+const Links = [
+  {
+    icon: HomeIcon,
+    title: "Homepage",
+    href: "/",
+  },
+  {
+    icon: Globe,
+    title: "World",
+    href: "/categories/world",
+  },
+  {
+    icon: BriefcaseBusiness,
+    title: "Business",
+    href: "/categories/business",
+  },
+  {
+    icon: Smile,
+    title: "Lifestyle",
+    href: "/categories/lifestyle",
+  },
+  {
+    icon: Trophy,
+    title: "Sports",
+    href: "/categories/sports",
+  },
+  {
+    icon: Tractor,
+    title: "Agriculture",
+    href: "/categories/agriculture",
+  },
+  {
+    icon: Laptop,
+    title: "Technology",
+    href: "/categories/technology",
+  },
+];
+const NavigationMenu = () => {
+  const { theme, setTheme } = useTheme();
   const notify = () =>
     toast.error(
       "Sign up is not available at the moment. Please try again later."
     );
-  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
-  const { theme, setTheme } = useTheme();
 
-  const menuItems = [
-    {
-      icon: HomeIcon,
-      title: "Homepage",
-      href: "/",
-    },
-    {
-      icon: Globe,
-      title: "World",
-      href: "/categories/world",
-    },
-    {
-      icon: BriefcaseBusiness,
-      title: "Business",
-      href: "/categories/business",
-    },
-    {
-      icon: Smile,
-      title: "Lifestyle",
-      href: "/categories/lifestyle",
-    },
-    {
-      icon: Trophy,
-      title: "Sports",
-      href: "/categories/sports",
-    },
-    {
-      icon: Tractor,
-      title: "Agriculture",
-      href: "/categories/agriculture",
-    },
-    {
-      icon: Laptop,
-      title: "Technology",
-      href: "/categories/technology",
-    },
-  ];
+  const router = useRouter();
+  const pathname = usePathname();
+  const checkActivePath = (path: string) => {
+    return path === pathname;
+  };
+  const [isSidebarOpen, setSidebarOpen] = useState(false);
+  const sidebarRef = useRef(null);
 
-  const HorizontalMenu = [
-    {
-      title: "Home",
-      href: "/",
-      icon: HomeIcon,
-    },
-    {
-      title: "Business",
-      href: "/categories/business",
-      icon: BriefcaseBusiness,
-    },
-    {
-      title: "Politics",
-      href: "/categories/politics",
-      icon: Globe,
-    },
-    {
-      title: "Trending",
-      href: "/categories/trending",
-      icon: Trophy,
-    },
-  ];
-
-  const handleLinkClick = () => {
-    setIsMenuOpen(false);
+  const handleToggleSidebar = () => {
+    setSidebarOpen(!isSidebarOpen);
   };
 
+  const handleClickOutside = (event: any) => {
+    if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
+      setSidebarOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    if (isSidebarOpen) {
+      document.addEventListener("click", handleClickOutside, true);
+    } else {
+      document.removeEventListener("click", handleClickOutside, true);
+    }
+    return () => {
+      document.removeEventListener("click", handleClickOutside, true);
+    };
+  }, [isSidebarOpen]);
+
+  const currentPath = router.pathname;
+
   return (
-    <Navbar
-      onMenuOpenChange={setIsMenuOpen}
-      maxWidth="full"
-      className="h-24 border-b"
-    >
-      <NavbarContent>
-        <NavbarMenuToggle
-          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-          className="lg:hidden"
-        />
-        <NavbarBrand>
-          <Link href="/" className="text-left">
-            <p className="font-bold text-2xl lg:text-3xl text-primary">
-              Express Newz
-            </p>
+    <>
+      <nav className="flex justify-between px-8 md:px-12 lg:px-14 items-center border-b shadow-md fixed h-20 z-[999] bg-background w-full ">
+        <div className="flex items-center gap-6">
+          <Button isIconOnly onClick={handleToggleSidebar} variant="ghost">
+            <AlignLeft />
+          </Button>
+          <Link href="/" className="flex flex-col items-start">
+            <p className="font-bold text-xl text-primary">Express Newz</p>
             <span className="text-sm">Fun, Relaxed and Unbiased</span>
           </Link>
-        </NavbarBrand>
-      </NavbarContent>
+        </div>
 
-      <NavbarContent className="hidden lg:flex gap-4" justify="center">
-        {HorizontalMenu.map((item, index) => (
-          <NavbarItem key={index}>
-            <Link
-              href={item.href}
-              className="flex items-center gap-2"
-              onClick={handleLinkClick}
-            >
-              <item.icon size={20} className="text-primary" />
-              <span className="font-semibold hover:text-primary transition-colors">
-                {item.title}
-              </span>
-            </Link>
-          </NavbarItem>
-        ))}
-      </NavbarContent>
+        <div id="links">
+          <ul className="hidden lg:flex md:gap-8">
+            {Links.slice(0, 3).map((link, index) => (
+              <li key={index}>
+                <Link
+                  href={link.href}
+                  className={`py-2 px-4 rounded-md text-sm flex items-center font-medium ${
+                    checkActivePath(link.href)
+                      ? "bg-primary text-background border border-primary"
+                      : "text-muted-foreground hover:bg-muted"
+                  }`}
+                >
+                  <span>
+                    <link.icon size={16} className="mr-2" />
+                  </span>
+                  {link.title}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
 
-      <NavbarContent justify="end" className="ml-8">
-        <NavbarItem>
-          <DateinNepali />
-        </NavbarItem>
-        <NavbarItem className="hidden md:flex">
-          <Button color="primary" onClick={notify}>
-            Sign Up
+        <div id="actionButton" className="flex gap-4 md:gap-8 items-center">
+          <div
+            className="hidden
+          md:flex
+          "
+          >
+            <Weather />
+          </div>
+          <Button onClick={notify} className="hidden xl:flex">
+            Sign In
           </Button>
-        </NavbarItem>
-        <NavbarItem>
           <Button
+            onClick={() => {
+              setTheme(theme === "dark" ? "light" : "dark");
+            }}
             isIconOnly
-            color="primary"
-            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+            variant="ghost"
           >
             {theme === "dark" ? <Sun /> : <Moon />}
           </Button>
-        </NavbarItem>
-      </NavbarContent>
+        </div>
+      </nav>
 
-      <NavbarMenu className="pt-8 flex flex-col gap-4">
-        {menuItems.map((item, index) => (
-          <NavbarMenuItem
-            key={index}
-            className="hover:bg-muted rounded-md py-2 px-4 w-48 transition-colors"
+      {/* Sidebar for mobile navigation */}
+      <AnimatePresence>
+        {isSidebarOpen && (
+          <motion.div
+            ref={sidebarRef}
+            initial={{ x: "-100%" }}
+            animate={{ x: 0 }}
+            exit={{ x: "-100%" }}
+            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+            className="fixed top-0 left-0 z-[999] w-64 h-full bg-background shadow-md xl:hidden"
           >
-            <Link
-              href={item.href}
-              className="flex items-center gap-2"
-              onClick={handleLinkClick}
-            >
-              <item.icon
-                size={24}
-                className="rounded-full bg-primary text-white w-fit h-10 p-2 aspect-square"
-              />
-              <span className="font-semibold">{item.title}</span>
-            </Link>
-          </NavbarMenuItem>
-        ))}
-        <NavbarItem className="flex md:hidden pl-4">
-          <Button color="primary" onClick={notify}>
-            Sign Up
-          </Button>
-        </NavbarItem>
-      </NavbarMenu>
-    </Navbar>
+            <div className="flex justify-between items-center h-16 px-4 border-b">
+              <h2 className="font-bold text-primary text-lg">Express Newz</h2>
+              <Button isIconOnly variant="ghost" onClick={handleToggleSidebar}>
+                <X />
+              </Button>
+            </div>
+            <ul className="flex flex-col gap-4 p-4 w-full">
+              {Links.map((link, index) => (
+                <li key={index}>
+                  <Link
+                    href={link.href}
+                    onClick={handleToggleSidebar}
+                    className={`py-2 px-4 w-full rounded-md text-sm flex gap-2 items-center font-medium ${
+                      checkActivePath(link.href)
+                        ? "bg-primary text-background border border-primary"
+                        : "text-muted-foreground hover:bg-muted"
+                    }`}
+                  >
+                    <span>
+                      <link.icon size={16} className="mr-2" />
+                    </span>
+                    {link.title}
+                  </Link>
+                </li>
+              ))}
+              <li>
+                <Button onClick={notify}>
+                  <User2 />
+                  Sign In
+                </Button>
+              </li>
+            </ul>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
-}
+};
+
+export default NavigationMenu;
