@@ -45,15 +45,15 @@ const PriceCard: React.FC = () => {
 
   return (
     <div>
-      <Card className="max-w-sm overflow-x-auto p-6">
+      <Card className="max-w-sm overflow-x-auto pt-6 px-6">
         <CardHeader>
           <CardTitle className="text-md">सुन र चाँदीको मूल्य</CardTitle>
           <CardDescription className="text-sm">
             नेपाल राष्ट्र बैंकद्वारा प्रकाशित सुन र चाँदीको मूल्य
           </CardDescription>
         </CardHeader>
-        <Divider />
-        <CardContent>
+
+        <CardContent className="mt-2">
           <CardDescription className="text-sm">
             {loading ? (
               <GoldSkeleton />
@@ -84,9 +84,8 @@ const PriceCard: React.FC = () => {
             )}
           </CardDescription>
         </CardContent>
-        <Divider />
         <CardFooter className="flex justify-end">
-          <Link href="/gold" className="pt-4 text-primary">
+          <Link href="/gold" className="text-primary">
             थप विवरणहरू
           </Link>
         </CardFooter>

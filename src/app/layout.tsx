@@ -34,7 +34,7 @@ export default function RootLayout({
         <body className={inter.className} suppressHydrationWarning={true}>
           <NavigationBar />
           {/* <DateTemperature /> */}
-          <div className="min-h-screen pt-[7.5rem] container">{children}</div>
+          <div className="min-h-screen pt-[4rem] container">{children}</div>
           <Toaster position="bottom-right" />
           <Footer />
         </body>
