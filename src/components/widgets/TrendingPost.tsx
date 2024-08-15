@@ -1,7 +1,5 @@
-"use client";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { Clock12, PenIcon, TrendingUp } from "lucide-react";
 
 interface Post {
@@ -71,7 +69,7 @@ const TrendingPost: React.FC = () => {
         <p>No trending posts available</p>
       ) : (
         posts.map((post) => (
-          <div className="">
+          <div key={post.slug}>
             <Link href={`/news/${post.slug}`}>
               <div>
                 <h2 className="text-lg font-bold">{post.title}</h2>
