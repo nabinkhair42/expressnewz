@@ -8,7 +8,7 @@ import TrendingPost from "@/components/widgets/TrendingPost";
 import CategorizedPost from "@/components/widgets/CategorizedPost";
 const page = () => {
   return (
-    <div>
+    <div className="overflow-x-clip">
       <RecommendedPost />
 
       <div className="grid grid-cols-1 xl:grid-cols-[1fr_350px] mt-4 ">

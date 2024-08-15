@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { Clock12, PenIcon, TrendingUp } from "lucide-react";
 import { TrendingPostSkeleton } from "../skeletons/TrendingPost";
+import { Separator } from "@/components/ui/separator";
 
 interface Post {
   slug: string;
@@ -71,20 +72,21 @@ const TrendingPost: React.FC = () => {
   if (error) return <p>Error: {error}</p>;
 
   return (
-    <div className="flex flex-col p-4 px-6 gap-4 xl:gap-6 border rounded-md max-w-sm">
+    <div className="flex flex-col p-4 px-6 gap-4 xl:gap-6 rounded-md max-w-sm">
       <h1 className="text-2xl font-bold flex gap-2 items-center">
         <TrendingUp className="text-primary" />
         Trending Posts:
       </h1>
+      <Separator />
       {posts.length === 0 ? (
         <p>No trending posts available</p>
       ) : (
         posts.slice(0, 3).map((post) => (
           <div key={post.slug}>
-            <Link href={`${post.path}`}>
-              <div>
-                <h2 className="text-lg font-bold">{post.title}</h2>
-                <div className="flex justify-start items-start gap-2">
+            <Link href={post.path} className="flex flex-col gap-2 ">
+              <h2 className="text-lg font-bold">{post.title}</h2>
+              <div className="flex justify-start items-start gap-2">
+                <div className="text-muted-foreground flex flex-col gap-2 md:flex-row">
                   <div className="flex items-center gap-2 text-sm">
                     <Clock12 size={16} />
                     <span>{post.date}</span>
@@ -95,6 +97,7 @@ const TrendingPost: React.FC = () => {
                   </div>
                 </div>
               </div>
+              <Separator />
             </Link>
           </div>
         ))

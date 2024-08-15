@@ -58,7 +58,7 @@ const BlogPost = async ({ params }: { params: { slug: string } }) => {
             <h1 className="font-bold text-3xl mb-2">{data.title}</h1>
 
             {/* Author Details */}
-            <div className="flex justify-between items-center">
+            <div className="flex md:justify-between md:items-center items-start  justify-start  flex-col md:flex-row">
               <div className="flex gap-2 items-center justify-center">
                 <Avatar
                   src={data.image}
@@ -86,7 +86,7 @@ const BlogPost = async ({ params }: { params: { slug: string } }) => {
             {/* Categories Displayed */}
             {data.categories && data.categories.length > 0 && (
               <div className="mt-8">
-                <div className="list-disc pl-5 flex gap-2">
+                <div className="flex gap-2 md:flex-row flex-col">
                   {data.categories.map((category: string, index: number) => (
                     <p key={index} className="text-primary">
                       <Link href={`/categories/${category.toLowerCase()}`}>

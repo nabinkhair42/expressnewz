@@ -3,6 +3,7 @@ import { Avatar, Divider } from "@nextui-org/react";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { MajorPostLoading } from "@/components/skeletons/MajorPostLoading";
+import { Separator } from "@/components/ui/separator";
 
 // Define the types for your post data
 interface Post {
@@ -60,11 +61,11 @@ const RecommendedPost: React.FC = () => {
       ) : (
         // Add up to 5 only recommended posts
         posts.slice(0, 3).map((post, index) => (
-          <div key={index} className="post border-b">
+          <div key={index} className="post">
             <Link href={post.path}>
-              <div className="p-4 rounded-md mb-4 flex flex-col items-center justify-center">
+              <div className="p-4 rounded-md flex flex-col items-center justify-center gap-2">
                 <h2 className="text-3xl font-bold text-center">{post.title}</h2>
-                <div className="flex gap-6 items-center justify-center ">
+                <div className="flex gap-6 items-center justify-center text-nowrap">
                   <p className="flex items-center justify-center gap-2 text-primary">
                     <Avatar
                       src={post.image}
@@ -78,6 +79,7 @@ const RecommendedPost: React.FC = () => {
                   <p className="text-muted-foreground">{post.date}</p>
                 </div>
               </div>
+              <Separator />
             </Link>
             <Divider />
           </div>

@@ -13,6 +13,7 @@ import { Gold, Silver } from "@/icons/icons";
 import Link from "next/link";
 import { GoldSkeleton } from "../skeletons/GoldSkeleton";
 import { ConvertToNepaliNumerals } from "@/components/reusable/NepaliNumerals";
+import { Separator } from "@/components/ui/separator";
 
 interface PriceData {
   name: string;
@@ -59,11 +60,9 @@ const PriceCard: React.FC = () => {
             ) : error ? (
               <div className="p-4 text-red-500">{error}</div>
             ) : prices.length > 0 ? (
-              prices.map((price, index) => (
-                <div
-                  key={index}
-                  className="flex justify-between items-center border-b"
-                >
+              //Show first 3 content
+              prices.slice(0, 3).map((price, index) => (
+                <div key={index} className="flex justify-between items-center">
                   <div className="flex items-center gap-2">
                     {price.name.includes("Gold") ? (
                       <Gold className="text-yellow-500" />
@@ -83,11 +82,12 @@ const PriceCard: React.FC = () => {
             )}
           </CardDescription>
         </div>
-        <CardFooter className="flex justify-end">
+        <Separator />
+        <div className="flex justify-end py-2">
           <Link href="/gold" className="text-primary">
             थप विवरणहरू
           </Link>
-        </CardFooter>
+        </div>
       </Card>
     </div>
   );
