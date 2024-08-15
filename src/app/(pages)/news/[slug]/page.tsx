@@ -1,3 +1,4 @@
+// src/app/news/posts/[slug]/page.tsx
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
@@ -5,9 +6,10 @@ import { markdownToHtml } from "@/lib/blogmarkdownToHtml";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import { Calendar } from "lucide-react";
-import { Avatar } from "@nextui-org/react";
+import { Avatar, Chip } from "@nextui-org/react";
 import Link from "next/link";
 import { ShareMenu } from "@/components/reusable/share";
+import RelatedPost from "@/components/widgets/RelatedPost";
 
 type Post = {
   slug: string;
@@ -40,7 +42,7 @@ const BlogPost = async ({ params }: { params: { slug: string } }) => {
   const htmlContent = await markdownToHtml(filePath);
 
   return (
-    <div className="mx-auto ">
+    <div className="mx-auto">
       <div className="max-w-screen-xl mx-auto relative">
         <div
           className="bg-cover bg-center text-center overflow-hidden"
@@ -52,10 +54,10 @@ const BlogPost = async ({ params }: { params: { slug: string } }) => {
         ></div>
 
         <div className="max-w-3xl mx-auto">
-          <div className="rounded-t-md bg-background -mt-32 px-5 sm:px-10 border pt-10">
+          <div className="rounded-t-md bg-background -mt-32 px-5 sm:px-10 border py-10">
             <h1 className="font-bold text-3xl mb-2">{data.title}</h1>
 
-            {/* Author Details  */}
+            {/* Author Details */}
             <div className="flex justify-between items-center">
               <div className="flex gap-2 items-center justify-center">
                 <Avatar
@@ -73,8 +75,7 @@ const BlogPost = async ({ params }: { params: { slug: string } }) => {
               <ShareMenu />
             </div>
 
-            {/* Complete News Goes Here  */}
-
+            {/* Complete News Goes Here */}
             <p className="leading-8 text-[18px] text-justify mt-4">
               <div
                 className="prose"
@@ -82,15 +83,16 @@ const BlogPost = async ({ params }: { params: { slug: string } }) => {
               />
             </p>
 
-            {/* Categories Displayed  */}
-
+            {/* Categories Displayed */}
             {data.categories && data.categories.length > 0 && (
               <div className="mt-8">
                 <div className="list-disc pl-5 flex gap-2">
                   {data.categories.map((category: string, index: number) => (
                     <p key={index} className="text-primary">
                       <Link href={`/categories/${category.toLowerCase()}`}>
-                        #{category}
+                        <Chip color="primary" className="px-2 py-1">
+                          # {category}
+                        </Chip>
                       </Link>
                     </p>
                   ))}
@@ -100,6 +102,9 @@ const BlogPost = async ({ params }: { params: { slug: string } }) => {
           </div>
         </div>
       </div>
+
+      {/* Related Posts */}
+      {data.categories && <RelatedPost categories={data.categories} />}
     </div>
   );
 };
