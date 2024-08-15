@@ -1,3 +1,4 @@
+
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
@@ -47,41 +48,41 @@ const NewsPage = async () => {
   const posts = await fetchPosts();
 
   return (
-    <div className="">
-      <ul className="grid grid-cols-[repeat(auto-fit,_minmax(320px,_1fr))] gap-4 place-items-center">
-        {posts.map((post) => (
-          <Card
-            key={post.slug}
-            className="hover:shadow-lg transition-shadow bg-inherit flex flex-col w-80 min-h-80"
-          >
-            <Link href={`/news/${post.slug}`} className="flex flex-col h-full">
-              <CardHeader className="relative overflow-hidden h-40">
-                <Image
-                  src={post.image}
-                  alt={post.title}
-                  height={400}
-                  width={400}
-                  className="object-cover w-full h-full rounded-t-md shadow-sm"
-                />
-              </CardHeader>
-              <CardFooter className="flex flex-col items-start p-4 flex-grow">
-                <CardTitle className="text-[18px]">{post.title}</CardTitle>
-                <CardDescription className="flex flex-col gap-2 mt-2">
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <Clock12 size={16} />
-                    {post.date}
-                  </div>
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <PenIcon width={16} />
-                    {post.author}
-                  </div>
-                </CardDescription>
-              </CardFooter>
-            </Link>
-          </Card>
-        ))}
-      </ul>
+    <div className="p-4">
+    <div className="grid grid-cols-[repeat(auto-fill,_minmax(250px,_1fr))] gap-4">
+      {posts.map((post) => (
+        <Card
+          key={post.slug}
+          className="hover:shadow-lg transition-shadow bg-inherit flex flex-col bg-background rounded-lg overflow-hidden"
+        >
+          <Link href={`/news/${post.slug}`} className="flex flex-col h-full">
+            <CardHeader className="relative overflow-hidden h-40">
+              <Image
+                src={post.image}
+                alt={post.title}
+                layout="fill" // Ensure the image covers the area without distortion
+                objectFit="cover"
+                className="w-full h-full rounded-t-lg shadow-sm"
+              />
+            </CardHeader>
+            <CardFooter className="flex flex-col p-4 flex-grow items-start">
+              <CardTitle className="text-[18px]">{post.title}</CardTitle>
+              <CardDescription className="flex flex-col gap-2 mt-2">
+                <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                  <Clock12 size={16} />
+                  {post.date}
+                </div>
+                <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                  <PenIcon width={16} />
+                  {post.author}
+                </div>
+              </CardDescription>
+            </CardFooter>
+          </Link>
+        </Card>
+      ))}
     </div>
+  </div>
   );
 };
 

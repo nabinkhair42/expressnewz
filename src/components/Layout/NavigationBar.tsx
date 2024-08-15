@@ -164,7 +164,7 @@ const NavigationMenu = () => {
             animate={{ x: 0 }}
             exit={{ x: "-100%" }}
             transition={{ type: "spring", stiffness: 300, damping: 30 }}
-            className="fixed top-0 left-0 z-[999] w-64 h-full bg-background shadow-md xl:hidden"
+            className="fixed top-0 left-0 z-[999] w-64 h-full bg-background shadow-md"
           >
             <div className="flex justify-between items-center h-16 px-4 border-b">
               <h2 className="font-bold text-primary text-lg">Express Newz</h2>

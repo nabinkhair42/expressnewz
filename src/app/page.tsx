@@ -7,13 +7,9 @@ const page = () => {
   return (
     <div>
       <Carousel />
-      <div className="grid grid-cols-5 gap-4">
-        <div className="col-span-4">
-          <NewsPage />
-        </div>
-        <div className="col-span-1">
-          <GoldPrice />
-        </div>
+      <div className="flex flex-col 2xl:flex-row">
+        <NewsPage />
+        <GoldPrice />
       </div>
       <div>
         <RecentPost />
