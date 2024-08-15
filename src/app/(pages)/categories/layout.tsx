@@ -5,7 +5,7 @@ export default function BasicPagesLayout({
 }) {
   return (
     <>
-      <div className="mt-[7rem]">{children}</div>
+      <div className="">{children}</div>
     </>
   );
 }
