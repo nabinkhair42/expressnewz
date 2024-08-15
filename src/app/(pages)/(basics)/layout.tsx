@@ -5,7 +5,7 @@ export default function BasicPagesLayout({
 }) {
   return (
     <>
-      <div className="min-h-screen">{children}</div>
+      <div className="min-h-screen mt-[7rem]">{children}</div>
     </>
   );
 }
