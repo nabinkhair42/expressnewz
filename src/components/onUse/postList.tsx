@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import React, { useEffect, useState } from "react";
 
 interface Post {
@@ -43,7 +44,7 @@ export default function PostList() {
       {posts.map((post) => (
         <div key={post.path}>
           <h2>{post.title}</h2>
-          <img src={post.image} alt={post.title} />
+          <Image src={post.image} alt={post.title} />
           <p>{post.categories.join(", ")}</p>
         </div>
       ))}

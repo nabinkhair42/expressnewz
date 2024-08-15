@@ -17,9 +17,6 @@ const page = () => {
         </div>
       </div>
       <Carousel />
-      <div>
-        <RecentPost />
-      </div>
     </div>
   );
 };
