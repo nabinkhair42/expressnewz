@@ -56,7 +56,7 @@ const NewsPage = async () => {
           posts.map((post) => (
             <Card
               key={post.slug}
-              className="hover:shadow-lg transition-shadow bg-inherit flex flex-col bg-background rounded-lg overflow-hidden"
+              className="hover:shadow-lg transition-shadow bg-inherit flex flex-col bg-background rounded-lg overflow-hidden border-none shadow-none"
             >
               <Link
                 href={`/news/${post.slug}`}

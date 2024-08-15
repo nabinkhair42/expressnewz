@@ -52,8 +52,7 @@ const PriceCard: React.FC = () => {
             नेपाल राष्ट्र बैंकद्वारा प्रकाशित सुन र चाँदीको मूल्य
           </CardDescription>
         </CardHeader>
-
-        <CardContent className="mt-2">
+        <div className="mt-2 text-nowrap">
           <CardDescription className="text-sm">
             {loading ? (
               <GoldSkeleton />
@@ -83,7 +82,7 @@ const PriceCard: React.FC = () => {
               <div className="p-4">डाटा उपलब्ध छैन</div>
             )}
           </CardDescription>
-        </CardContent>
+        </div>
         <CardFooter className="flex justify-end">
           <Link href="/gold" className="text-primary">
             थप विवरणहरू

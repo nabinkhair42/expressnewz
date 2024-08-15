@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { Clock12, PenIcon, TrendingUp } from "lucide-react";
+import { Bookmark, Clock12, PenIcon } from "lucide-react";
 import { TrendingPostSkeleton } from "../skeletons/TrendingPost";
 
 interface Post {
@@ -11,10 +11,11 @@ interface Post {
   author: string;
   image: string;
   path: string;
+  categories: string[];
 }
 
-const fetchPosts = async (): Promise<Post[]> => {
-  const response = await fetch("/api/posts");
+const fetchPosts = async (category: string): Promise<Post[]> => {
+  const response = await fetch(`/api/posts?category=${category}`);
   if (!response.ok) {
     throw new Error("Network response was not ok");
   }
@@ -26,7 +27,7 @@ const getRandomPosts = (posts: Post[], numberOfPosts: number): Post[] => {
   return shuffled.slice(0, numberOfPosts);
 };
 
-const TrendingPost: React.FC = () => {
+const CategorizedPost: React.FC = () => {
   const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -34,20 +35,9 @@ const TrendingPost: React.FC = () => {
   useEffect(() => {
     const fetchAndSetPosts = async () => {
       try {
-        const now = new Date();
-        const day = now.toISOString().split("T")[0];
-        const savedDay = localStorage.getItem("postsDay");
-        const savedPosts = localStorage.getItem("postsData");
-
-        if (savedDay === day && savedPosts) {
-          setPosts(JSON.parse(savedPosts));
-        } else {
-          const fetchedPosts = await fetchPosts();
-          const dailyPosts = getRandomPosts(fetchedPosts, 5);
-          localStorage.setItem("postsDay", day);
-          localStorage.setItem("postsData", JSON.stringify(dailyPosts));
-          setPosts(dailyPosts);
-        }
+        const fetchedPosts = await fetchPosts("agriculture");
+        const dailyPosts = getRandomPosts(fetchedPosts, 5);
+        setPosts(dailyPosts);
       } catch (error) {
         if (error instanceof Error) {
           setError(error.message);
@@ -62,27 +52,22 @@ const TrendingPost: React.FC = () => {
     fetchAndSetPosts();
   }, []);
 
-  if (loading)
-    return (
-      <p>
-        <TrendingPostSkeleton />
-      </p>
-    );
+  if (loading) return <p><TrendingPostSkeleton /></p>;
   if (error) return <p>Error: {error}</p>;
 
   return (
-    <div className="flex flex-col p-4 px-6 gap-4 xl:gap-6 border rounded-md max-w-sm">
+    <div className="flex flex-col p-4 pt-6 px-6 gap-4 xl:gap-6 border rounded-md max-w-sm">
       <h1 className="text-2xl font-bold flex gap-2 items-center">
-        <TrendingUp className="text-primary" />
-        Trending Posts:
+        <Bookmark className="text-primary" />
+        Agriculture
       </h1>
       {posts.length === 0 ? (
-        <p>No trending posts available</p>
+        <p>No posts available</p>
       ) : (
         posts.slice(0, 3).map((post) => (
           <div key={post.slug}>
-            <Link href={`${post.path}`}>
-              <div>
+            <Link href={post.path}>
+               
                 <h2 className="text-lg font-bold">{post.title}</h2>
                 <div className="flex justify-start items-start gap-2">
                   <div className="flex items-center gap-2 text-sm">
@@ -94,7 +79,7 @@ const TrendingPost: React.FC = () => {
                     <span>{post.author}</span>
                   </div>
                 </div>
-              </div>
+               
             </Link>
           </div>
         ))
@@ -103,4 +88,4 @@ const TrendingPost: React.FC = () => {
   );
 };
 
-export default TrendingPost;
+export default CategorizedPost;

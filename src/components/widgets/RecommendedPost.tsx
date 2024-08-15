@@ -60,7 +60,7 @@ const RecommendedPost: React.FC = () => {
       ) : (
         // Add up to 5 only recommended posts
         posts.slice(0, 3).map((post, index) => (
-          <div key={index} className="post">
+          <div key={index} className="post border-b">
             <Link href={post.path}>
               <div className="p-4 rounded-md mb-4 flex flex-col items-center justify-center">
                 <h2 className="text-3xl font-bold text-center">{post.title}</h2>
