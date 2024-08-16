@@ -2,7 +2,7 @@
 title: "थाइल्याण्डको प्रधानमन्त्रीमा ३७ वर्षीया सिनावात्रा निर्वाचित"
 date: "३२ श्रावण २०८१, शुक्रबार"
 author: "Express Newz"
-categories: ["lifestyle", "technology"]
+categories: ["politics", "world"]
 image: "/images/thailand-pm.jpg"
 ---
 
