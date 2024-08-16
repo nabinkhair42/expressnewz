@@ -36,7 +36,7 @@ const CategorizedPost: React.FC = () => {
   useEffect(() => {
     const fetchAndSetPosts = async () => {
       try {
-        const fetchedPosts = await fetchPosts("agriculture");
+        const fetchedPosts = await fetchPosts("politics");
         const dailyPosts = getRandomPosts(fetchedPosts, 5);
         setPosts(dailyPosts);
       } catch (error) {
@@ -65,7 +65,7 @@ const CategorizedPost: React.FC = () => {
     <div className="flex flex-col p-4 pt-6 px-6 gap-4 xl:gap-6 max-w-sm">
       <h1 className="text-2xl font-bold flex gap-2 items-center">
         <Bookmark className="text-primary" />
-        Agriculture
+        Politics
       </h1>
       <Separator/>
       {posts.length === 0 ? (

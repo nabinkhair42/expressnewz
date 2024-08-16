@@ -1,6 +1,6 @@
 ---
 title: "रुसी ब्याले डान्सरलाई १२ बर्षको जेल सजाय"
-date: " शुक्रबार, ३२ साउन २०८१"
+date: " ३२ श्रावण २०८१, शुक्रबार"
 author: "Express Newz"
 categories: ["world"]
 image: "/images/russian-belly-dancer.jpg"

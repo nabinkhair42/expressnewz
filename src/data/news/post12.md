@@ -1,17 +1,19 @@
 ---
-title: "The Impact of Social Media on Modern Communication"
-date: "2024-08-24"
-author: "Jasmine Reddy"
+title: "आउँदो बुधवार ३०० वाटको चार्जर ल्याउँदै रियलमी, ३५ सेकेन्डमै ० देखि १७ प्रतिशत चार्ज हुने"
+date: "३२ श्रावण २०८१, शुक्रबार"
+author: "Express Newz"
 categories: ["lifestyle", "technology"]
-image: "/images/tech.jpg"
+image: "/images/realme_fast_charging_smartphone.jpg"
 ---
+काठमाडौं । चिनियाँ स्मार्टफोन निर्माता रियलमीले ३०० वाट क्षमताको चार्जर ल्याउने भएको छ । अगस्ट १४ मा चीनमा आयोजना हुने विशेष कार्यक्रममार्फत कम्पनीले यो चार्जिङ प्रविधि सार्वजनिक गर्न लागेको हो । 
 
-Social media has dramatically altered the way we communicate and interact. Understanding its impact can provide insights into its role in contemporary society.
+यो वायर्ड चार्जरको बारेमा पहिले नै केही अफवाह चलेका थिए, जसलाई रियलमीले पुष्टि गरेको छ । रोचक कुरा त के छ भने, आधिकारिक रूपमा घोषणा हुनुअघि नै यो प्रविधिको प्रयोग देखाउने एक भिडिओ पनि लिक भएको छ ।
 
-## Key Effects
+भिडिओमा देखिए अनुसार, यो चार्जरले मात्र ३२ सेकेन्डमा स्मार्टफोनको ब्याट्रीलाई १५ प्रतिशतसम्म चार्ज गर्छ, र ३५ सेकेन्डमा ब्याट्री १७ प्रतिशत पुगिसक्छ । 
 
-- **Increased Connectivity:** Social media connects people across the globe.
-- **Changing Communication Patterns:** Shifts in how we communicate and share information.
-- **Influence on Behavior:** The impact of social media on personal and professional behavior.
+साओमीले पनि गत वर्ष ३०० वाटको चार्जिङ सिस्टमको घोषणा गरेको थियो, तर अहिलेसम्म कुनै पनि फोनमा यसलाई प्रयोग गरिएको छैन । यसैले, रियलमीको ३०० वाटको चार्जर नै पहिलो पटक बजारमा आउने अनुमान गरिएको छ ।
 
-Social media continues to shape communication trends and social interactions.
+रियलमीले यसअघि नै २४० वाटको चार्जिङ सपोर्ट गर्ने फोनहरू उत्पादन गरिसकेको छ ।
+
+प्राविधिक विशेषज्ञहरुका अनुसार यो चार्जरले स्मार्टफोन बजारमा ठूलो हलचल मच्चाउने निश्चित छ ।
+

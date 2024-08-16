@@ -1,6 +1,6 @@
 ---
 title: "ओलीको प्रधानमन्त्रीमा नियुक्तिविरुद्धको रिट सर्वोच्चद्वारा खारेज"
-date: "३१ श्रावण २०८१, शुक्रबार"
+date: "३२ श्रावण २०८१, शुक्रबार"
 author: "Express Newz"
 categories: ["politics"]
 image: "/images/kp-oli.jpg"
