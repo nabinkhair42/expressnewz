@@ -1,17 +1,14 @@
 ---
-title: "Exploring the Future of Urban Agriculture"
-date: "2024-08-14"
-author: "Priya Sharma"
-categories: ["agriculture", "lifestyle"]
-image: "/images/Urban_Agriculture.jpg"
+title: "ओलीको प्रधानमन्त्रीमा नियुक्तिविरुद्धको रिट सर्वोच्चद्वारा खारेज"
+date: "३१ श्रावण २०८१, शुक्रबार"
+author: "Express Newz"
+categories: ["politics"]
+image: "/images/kp-oli.jpg"
+author-image: "/"
 ---
 
-Urban agriculture is rapidly evolving, offering new opportunities for sustainable food production in city environments. Innovations in vertical farming, rooftop gardens, and hydroponics are making it easier to grow fresh produce in urban areas.
+नेकपा एमाले अध्यक्ष एवं संसदीय दलका नेता केपी शर्मा ओलीकाे प्रधानमन्त्री नियुक्ति असंवैधानिक रहेको भन्दै सर्वोच्च अदालतमा दायर भएको रिट खारेज भएको छ ।सर्वोच्चको संवैधानिक इजलासले उक्त रिट खारेज गरेको हो ।
 
-## Major Trends
+ओलीलाई संविधानको गलत धारा प्रयोग गरेर प्रधानमन्त्री नियुक्त गरिएको भन्दै २०८१ साउन १४ गते तीन वटा रिट संवैधानिक इजलासमा दर्ता भएकाे थियाे । उक्त रिटमाथि सुनुवाइका लागि प्रधानन्यायाधीश विश्वम्भरप्रसाद श्रेष्ठ नेतृत्वकाे ६ सदस्यीय इजलास गठन भएको थियो, जसमा न्यायाधीशहरु प्रकाशमानसिंह राउत, सपना मल्ल प्रधान, प्रकाशकुमार ढुंगाना र कुमार रेग्मी रहेका छन् ।
 
-- **Vertical Farming:** Stacked layers of crops in controlled environments are maximizing space and resources.
-- **Rooftop Gardens:** Utilizing rooftop spaces for growing food is becoming a popular trend in metropolitan areas.
-- **Hydroponics Systems:** Soil-less growing techniques are reducing water usage and increasing crop yields.
-
-These advancements are contributing to more sustainable and resilient urban food systems.
+राष्ट्रपति रामचन्द्र पौडेलले नेपालको संविधानको धारा ७६ को उपधारा २ अनुसार गरेको नियुक्ति गैरसंवैधानिक रहेको रिट निवेदकको दाबी थियो । निवेदकले उपधारा २ बमोजिम नियुक्त भएको प्रधानमन्त्रीले विश्वासको मत प्राप्त गर्न नसकेपछि स्वतः उपधारा ३ आकर्षित हुने र यसअनुसार सबैभन्दा ठूलो दलको संसदीय दलका नेता प्रधानमन्त्री बन्नुपर्ने दाबी गरेका थिए । उपधारा ३ अनुसार जाँदा प्रतिनिधिसभाकाे ठूलाे दलकाे हैसियतमा कांग्रेस सभापति शेरबहादुर देउवाको पालो आउँथ्यो ।

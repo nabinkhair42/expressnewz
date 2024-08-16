@@ -1,17 +1,14 @@
 ---
-title: "Sustainable Fashion: The Future of Eco-Friendly Clothing"
-date: "2024-08-16"
-author: "Sofia Martinez"
-categories: ["lifestyle", "environment"]
-image: "/images/tea.jpg"
+title: "रुसी ब्याले डान्सरलाई १२ बर्षको जेल सजाय"
+date: " शुक्रबार, ३२ साउन २०८१"
+author: "Express Newz"
+categories: ["world"]
+image: "/images/russian-belly-dancer.jpg"
 ---
+रुसकी एक ब्याले डान्सरलाई १२ बर्षको जेल सजाय भएको छ ।
 
-Sustainable fashion is reshaping the clothing industry with eco-friendly practices and materials. The focus on reducing environmental impact is driving significant changes in how clothing is produced and consumed.
+रुसी अदालतले ब्याले डान्सर केसेनिया कार्लिनालाई युक्रेनलाई सहयोग गर्ने एक परोपकारी संस्थालाई ५१ डलर दान गरेको आरोपमा १२ वर्षको जेल सजाय सुनाएको मिडिया रिपोर्टमा उल्लेख गरिएको छ ।
 
-## Key Aspects
+उनलाई देशद्रोहको मुद्दामा यो सजाय दिइएको हो । कार्लिना हाल लस एन्जलसमा बस्दै आएकी थिइन् र उनलाई २०२१ मा अमेरिकी नागरिकता दिइएको थियो । क्यारोलिनालाई जनवरीमा मस्कोबाट १६ सय किलोमिटर पूर्वमा येकातेरिनबर्गमा पारिवारिक यात्राको क्रममा पक्राउ गरिएको थियो ।
 
-- **Eco-Friendly Materials:** The use of organic and recycled materials is increasing.
-- **Ethical Production Practices:** Brands are adopting fair trade and ethical labor practices.
-- **Consumer Trends:** Growing demand for sustainable fashion is influencing market dynamics.
-
-These changes are contributing to a more environmentally conscious fashion industry.
+रुसको संघीय सुरक्षा सेवाले केसेनिया कार्लिनाले युक्रेनी सेनालाई हतियार उपलब्ध गराउने युक्रेनी संगठनका लागि रकम जुटाएको बताएको छ ।

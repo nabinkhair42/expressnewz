@@ -1,17 +1,12 @@
 ---
-title: "Advances in Renewable Energy Storage Solutions"
-date: "2024-08-17"
-author: "Rajiv Kumar"
-categories: ["technology", "environment"]
-image: "/images/tech.jpg"
+title: "हिमालयन बैंकले घटायो मुद्दति निक्षेपमा ब्याजदर"
+date: "शुक्रबार, ३२ साउन २०८१"
+author: "Express Newz"
+categories: ["business"]
+image: "/images/interest-rate.jpeg"
 ---
+हिमालयन बैंकले भाद्र महिनालाई ब्याजदर घटाएको छ । 
 
-Effective energy storage is crucial for the success of renewable energy sources. Recent innovations in storage technologies are making renewable energy more reliable and accessible.
+बैंकले भाद्रमा मुद्दति निक्षेपमा संस्थागततर्फ ६ प्रतिशत र व्यक्तिगततर्फ ७ प्रतिशत ब्याज तोकेको छ। साउनमा बैंकको  संस्थागततर्फ ६.५० प्रतिशत र व्यक्तिगततर्फ ७.५० प्रतिशत ब्याजदर रहेको थियो।
 
-## Major Innovations
-
-- **Battery Technologies:** New types of batteries are offering improved energy storage.
-- **Grid Storage Solutions:** Enhanced storage solutions are stabilizing energy grids.
-- **Energy Management Systems:** Advanced systems are optimizing energy use and storage.
-
-These innovations are essential for integrating renewable energy into the power grid.
+तेस्तै,बैंकले साधारण बचत खातामा ब्याजदर स्थिर राखेको छ।  बैंकले साधारण बचतमा न्यूनतम ३.२५० प्रतिशतदेखि ५.२५० प्रतिशत ब्याजदर तोकेको छ। 

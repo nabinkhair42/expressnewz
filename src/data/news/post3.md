@@ -1,17 +1,15 @@
 ---
-title: "The Rise of Remote Work: Trends and Predictions"
-date: "2024-08-15"
-author: "Emily Johnson"
-image: "/images/news.jpg"
-categories: ["lifestyle", "business"]
+title: "रंगेलीका मेयर बगडीया नगर विकास कोषको सञ्चालक समितिमा नियुक्त"
+date: "३१ श्रावण २०८१, बिहीबार"
+author: "Express Newz"
+image: "/images/mayor-rangoliya.png"
+categories: ["business"]
 ---
 
-Remote work is becoming a permanent fixture in the modern workplace. Understanding the latest trends and future predictions can help businesses and employees navigate this evolving landscape.
+विराटनगर । नगर विकास कोषको सञ्चालक समितिमा रंगेली नगरपालिकाका मेयर दिलिप बगडीया नियुक्त भएका छन् ।
 
-## Emerging Trends
+रंगेलीलाई नमूना नगरको रुपमा विकास गर्न सफल विकासप्रेमी मेयर बगडीयालाई गत साउन २२ गते बसेको मन्त्रीपरिषद बैठकले कोषको सञ्चालक समितिमा नियुक्त गरेको हो । 
 
-- **Hybrid Work Models:** Combining remote and in-office work is becoming the norm.
-- **Remote Work Tools:** Innovations in collaboration tools are enhancing remote work productivity.
-- **Future Predictions:** Insights into how remote work will shape the future of business.
+कोशी प्रदेशबाट मेयर बगडीया मात्र नगर विकास कोषको सञ्चालक समिति सदस्य पदमा नियुक्त भएका हुन् । उनलाई नगर विकास कोष ऐन २०५३ को दफा १४ को उपदफा २(घ) बमोजिम सरकारले नियुक्त गरेको हो । 
 
-These trends highlight the ongoing shift towards more flexible work environments.
+सञ्चालक समितिमा नियुक्त भएपछि मेयर बगडीयाले नगर विकास कोषबाट दिने सेवा प्रवाहलाई सहज र सुलभ ढंगले कार्यान्वयनमा लागिने प्रतिवद्धता जनाएका छन् । ‘समग्रमा स्थानीय तहको विकास निर्माणको गतिलाई अघि बढाउन  सहुलियतरुपमा ऋण उपलब्ध गराई सेवालाई सहज र सुृलभ ढंगले अगाडी बडाउन लागि पर्नेछु ।’ मेयर बगडीयाले भने ।
