@@ -99,26 +99,26 @@ const NavigationMenu = () => {
 
   return (
     <>
-      <nav className="flex justify-between px-8 md:px-12 lg:px-14 items-center border-b shadow-md fixed h-20 z-[999] bg-background w-full ">
+      <nav className="flex justify-between px-8 md:px-12 lg:px-14 items-center border-b shadow-md fixed h-20 z-[999] bg-background w-full bg-primary">
         <div className="flex items-center gap-6">
           <Button isIconOnly onClick={handleToggleSidebar} variant="ghost">
             <AlignLeft />
           </Button>
           <Link href="/" className="flex flex-col items-start">
-            <p className="font-bold text-xl text-primary">Express Newz</p>
+            <p className="font-bold text-xl text-orange-400">Express Newz</p>
             <span className="text-sm">Fun, Relaxed and Unbiased</span>
           </Link>
         </div>
 
         <div id="links">
-          <ul className="hidden lg:flex md:gap-8 bg-orange-400 items-center">
+          <ul className="hidden lg:flex md:gap-8 items-center">
             {Links.slice(0, 3).map((link, index) => (
               <li key={index}>
                 <Link
                   href={link.href}
                   className={`py-2 px-4  text-sm flex items-center font-medium transition-colors ${
                     checkActivePath(link.href)
-                      ? "bg-primary text-background border border-primary"
+                      ? "bg-orange-400 text-background"
                       : " hover:bg-primary"
                   }`}
                 >
