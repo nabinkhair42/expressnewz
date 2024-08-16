@@ -65,7 +65,7 @@ const BlogPost = async ({ params }: { params: { slug: string } }) => {
                   alt={data.author}
                   size="sm"
                   isBordered={true}
-                  className="inline-block ml-2 border border-primary h-12 w-12"
+                  className="inline-block ml-2 border border-orange-400 h-12 w-12"
                 />
                 <div className="flex flex-col justify-start items-start gap-1 ">
                   <p>{data.author}</p>

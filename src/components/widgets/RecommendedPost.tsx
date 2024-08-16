@@ -72,7 +72,7 @@ const RecommendedPost: React.FC = () => {
                       alt={post.author}
                       size="sm"
                       isBordered={true}
-                      className="inline-block ml-2 border border-primary h-12 w-12"
+                      className="inline-block ml-2 border border-orange-400 h-12 w-12"
                     />
                     By {post.author}
                   </p>

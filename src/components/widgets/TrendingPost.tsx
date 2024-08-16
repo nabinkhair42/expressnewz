@@ -45,9 +45,9 @@ const TrendingPost: React.FC = () => {
         } else {
           const fetchedPosts = await fetchPosts();
           const dailyPosts = getRandomPosts(fetchedPosts, 5);
-          // localStorage.setItem("postsDay", day);
-          // localStorage.setItem("postsData", JSON.stringify(dailyPosts));
-          // setPosts(dailyPosts);
+          localStorage.setItem("postsDay", day);
+          localStorage.setItem("postsData", JSON.stringify(dailyPosts));
+          setPosts(dailyPosts);
         }
       } catch (error) {
         if (error instanceof Error) {

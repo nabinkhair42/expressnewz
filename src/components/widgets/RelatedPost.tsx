@@ -82,7 +82,7 @@ const RelatedPosts: React.FC<{ categories: string[] }> = ({ categories }) => {
               </p>
               <div className="flex justify-between items-center">
                 <div className="flex items-center space-x-4">
-                  <Avatar src="/author/author.jpg" size="sm" className="w-fit aspect-square object-fill"/>
+                  <Avatar src="/author/author.jpg" size="sm" className="w-fit aspect-square object-fill border border-orange-400"/>
                   <span className="font-medium dark:text-white">
                     {post.author}
                   </span>

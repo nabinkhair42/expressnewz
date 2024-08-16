@@ -111,15 +111,15 @@ const NavigationMenu = () => {
         </div>
 
         <div id="links">
-          <ul className="hidden lg:flex md:gap-8">
+          <ul className="hidden lg:flex md:gap-8 bg-orange-400 items-center">
             {Links.slice(0, 3).map((link, index) => (
               <li key={index}>
                 <Link
                   href={link.href}
-                  className={`py-2 px-4 rounded-md text-sm flex items-center font-medium ${
+                  className={`py-2 px-4  text-sm flex items-center font-medium transition-colors ${
                     checkActivePath(link.href)
                       ? "bg-primary text-background border border-primary"
-                      : "text-muted-foreground hover:bg-muted"
+                      : " hover:bg-primary"
                   }`}
                 >
                   <span>
@@ -178,7 +178,7 @@ const NavigationMenu = () => {
                   <Link
                     href={link.href}
                     onClick={handleToggleSidebar}
-                    className={`py-2 px-4 w-full rounded-md text-sm flex gap-2 items-center font-medium ${
+                    className={`py-2 px-4 w-full text-sm flex gap-2 items-center font-medium ${
                       checkActivePath(link.href)
                         ? "bg-primary text-background border border-primary"
                         : "text-muted-foreground hover:bg-muted"
