@@ -68,7 +68,7 @@ const RecommendedPost: React.FC = () => {
                 <div className="flex gap-6 items-center justify-center text-nowrap">
                   <p className="flex items-center justify-center gap-2 text-primary">
                     <Avatar
-                      src={post.image}
+                      src="/author/author.jpg"
                       alt={post.author}
                       size="sm"
                       isBordered={true}

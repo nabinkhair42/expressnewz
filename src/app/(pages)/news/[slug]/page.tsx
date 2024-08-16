@@ -61,7 +61,7 @@ const BlogPost = async ({ params }: { params: { slug: string } }) => {
             <div className="flex md:justify-between md:items-center items-start  justify-start  flex-col md:flex-row">
               <div className="flex gap-2 items-center justify-center">
                 <Avatar
-                  src={data.image}
+                  src="/author/author.jpg"
                   alt={data.author}
                   size="sm"
                   isBordered={true}
