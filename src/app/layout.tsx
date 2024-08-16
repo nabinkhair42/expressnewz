@@ -1,17 +1,19 @@
 import type { Metadata } from "next";
-import { Poppins } from "next/font/google";
+import { Mukta } from "next/font/google";
 import "./globals.css";
 import NavigationBar from "@/components/Layout/NavigationBar";
 import { ThemeProvider } from "@/components/ui/theme-provider";
 import DateTemperature from "@/components/onUse/DateTemperature";
 import { Toaster } from "react-hot-toast";
 import Footer from "@/components/Layout/Footer";
+import GotoTop from "@/components/reusable/gotoTop";
+import SmoothScrolling from "@/components/reusable/SmoothScrolling";
 
-const inter = Poppins({
+const inter = Mukta({
+  weight: ["200", "400", "600"],
   subsets: ["latin"],
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
 });
- 
+
 export const metadata: Metadata = {
   title: "Express Newz: Fun, Relaxed and Unbiased",
   description:
@@ -34,8 +36,11 @@ export default function RootLayout({
         <body className={inter.className} suppressHydrationWarning={true}>
           <NavigationBar />
           {/* <DateTemperature /> */}
-          <div className="min-h-screen pt-[6rem] container">{children}</div>
+          <SmoothScrolling>
+            <div className="min-h-screen pt-[6rem] container">{children}</div>
+          </SmoothScrolling>
           <Toaster position="bottom-right" />
+          <GotoTop />
           <Footer />
         </body>
       </ThemeProvider>

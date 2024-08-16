@@ -1,11 +1,11 @@
 "use client";
+
 import { Avatar, Divider } from "@nextui-org/react";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { MajorPostLoading } from "@/components/skeletons/MajorPostLoading";
 import { Separator } from "@/components/ui/separator";
 
-// Define the types for your post data
 interface Post {
   title: string;
   date: string;
@@ -26,17 +26,20 @@ const RecommendedPost: React.FC = () => {
       try {
         const response = await fetch("/api/posts");
         if (!response.ok) {
-          throw new Error("Network response was not ok");
+          throw new Error("Failed to fetch posts");
         }
         const data: Post[] = await response.json();
-        setPosts(data);
-      } catch (error) {
-        if (error instanceof Error) {
-          setError(error.message);
-        } else {
-          setError("An unknown error occurred");
-        }
-      } finally {
+
+        const sortedPosts = data.sort((a, b) => {
+          const numA = parseInt(a.path.replace(/\D/g, ""), 10);
+          const numB = parseInt(b.path.replace(/\D/g, ""), 10);
+          return numB - numA;
+        });
+
+        setPosts(sortedPosts);
+        setLoading(false);
+      } catch (error: any) {
+        setError(error.message);
         setLoading(false);
       }
     };
@@ -44,28 +47,21 @@ const RecommendedPost: React.FC = () => {
     fetchPosts();
   }, []);
 
-  if (loading)
-    return (
-      <p>
-        <MajorPostLoading />
-      </p>
-    );
+  if (loading) return <MajorPostLoading />;
   if (error) return <p>Error: {error}</p>;
 
   return (
     <div>
       {posts.length === 0 ? (
-        <p>
-          <MajorPostLoading />
-        </p>
+        <p>No posts available.</p>
       ) : (
-        // Add up to 5 only recommended posts
+        // Only display the top 3 sorted posts
         posts.slice(0, 3).map((post, index) => (
-          <div key={index} className="post">
-            <Link href={post.path}>
+          <div key={post.title}>
+            <Link href={post.path} className="flex flex-col gap-2">
               <div className="p-4 rounded-md flex flex-col items-center justify-center gap-2">
                 <h2 className="text-3xl font-bold text-center">{post.title}</h2>
-                <div className="flex gap-6 items-center justify-center text-nowrap">
+                <div className="flex md:gap-6 gap-2 items-center justify-center text-nowrap">
                   <p className="flex items-center justify-center gap-2 text-primary">
                     <Avatar
                       src="/author/author.jpg"
@@ -74,10 +70,11 @@ const RecommendedPost: React.FC = () => {
                       isBordered={true}
                       className="inline-block ml-2 border border-orange-400 h-12 w-12"
                     />
-                    By {post.author}
+                    {post.author}
                   </p>
                   <p className="text-muted-foreground">{post.date}</p>
                 </div>
+                {/* //For the last Post show image also  */}
               </div>
               <Separator />
             </Link>

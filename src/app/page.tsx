@@ -11,7 +11,7 @@ const page = () => {
     <div className="overflow-x-clip">
       <RecommendedPost />
 
-      <div className="grid grid-cols-1 xl:grid-cols-[1fr_350px] mt-4 ">
+      <div className="grid grid-cols-1 xl:grid-cols-[1fr_350px] mt-4">
         <NewsPage />
         <div className="flex flex-col gap-4 mt-4 md:flex-row items-center md:items-start xl:flex-col">
           <GoldPrice />
