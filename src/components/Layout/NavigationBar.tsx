@@ -166,7 +166,7 @@ const NavigationMenu = () => {
             transition={{ type: "spring", stiffness: 300, damping: 30 }}
             className="fixed top-0 left-0 z-[999] w-64 h-full bg-background shadow-md"
           >
-            <div className="flex justify-between items-center h-16 px-4 border-b">
+            <div className="flex justify-between items-center px-4 border-b h-20">
               <h2 className="font-bold text-primary text-lg">Express Newz</h2>
               <Button isIconOnly variant="ghost" onClick={handleToggleSidebar}>
                 <X />
