@@ -14,7 +14,7 @@ const page = () => {
         <NewsPage />
         <div className="flex flex-col gap-4 mt-4 md:flex-row items-center md:items-start xl:flex-col">
           <GoldPrice />
-          <TrendingPost />g
+          <TrendingPost />
           <CategorizedPost />
         </div>
       </div>
