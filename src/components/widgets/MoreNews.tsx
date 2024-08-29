@@ -52,7 +52,7 @@ const MoreNews = () => {
           <p>No posts available.</p>
         ) : (
           posts.map((post, index) => (
-            <Link key={index} href={`/news/${post.path}`}>
+            <Link key={index} href={`${post.path}`}>
               <div key={post.title} className="p-2 rounded-sm">
                 <div className="flex gap-4 items-center max-w-md">
                   <div id="image">
