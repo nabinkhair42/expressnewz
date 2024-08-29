@@ -1,10 +1,10 @@
 import React from "react";
-import { CardHoverEffectDemo } from "./component";
+import OurTeamCard from "@/app/(pages)/(basics)/our-team/component";
 
 const page = () => {
   return (
     <div>
-      <CardHoverEffectDemo />
+      <OurTeamCard />
     </div>
   );
 };

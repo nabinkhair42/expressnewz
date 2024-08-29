@@ -16,7 +16,7 @@ interface Post {
   path: string;
 }
 
-const RecommendedPost: React.FC = () => {
+const TopLatestPost: React.FC = () => {
   const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -86,4 +86,4 @@ const RecommendedPost: React.FC = () => {
   );
 };
 
-export default RecommendedPost;
+export default TopLatestPost;

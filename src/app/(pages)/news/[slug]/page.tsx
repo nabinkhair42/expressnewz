@@ -10,6 +10,7 @@ import { Avatar, Chip } from "@nextui-org/react";
 import Link from "next/link";
 import { ShareMenu } from "@/components/reusable/share";
 import RelatedPost from "@/components/widgets/RelatedPost";
+import AboveRelatedPost from "@/components/adsLayout/aboveRelatedPost";
 
 type Post = {
   slug: string;
@@ -102,6 +103,9 @@ const BlogPost = async ({ params }: { params: { slug: string } }) => {
           </div>
         </div>
       </div>
+
+      {/* Advertise */}
+      <AboveRelatedPost />
 
       {/* Related Posts */}
       {data.categories && <RelatedPost categories={data.categories} />}

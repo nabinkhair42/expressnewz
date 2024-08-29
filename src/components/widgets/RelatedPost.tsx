@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { Avatar, Chip } from "@nextui-org/react";
-import { MoveRight } from "lucide-react";
+import { ChevronRight, MoveRight } from "lucide-react";
 import Link from "next/link";
 
 type Post = {
@@ -62,15 +62,15 @@ const RelatedPosts: React.FC<{ categories: string[] }> = ({ categories }) => {
             >
               <div className="flex justify-between items-start mb-5 text-muted-foreground flex-col md:flex-row gap-2">
                 <div className="flex gap-2 md:flex-row flex-col">
-                {post.categories.map((category: string, index: number) => (
-                  <p key={index} className="text-primary">
-                    <Link href={`/categories/${category.toLowerCase()}`}>
-                      <Chip color="primary" className="px-2 pt-1">
-                        # {category}
-                      </Chip>
-                    </Link>
-                  </p>
-                ))}
+                  {post.categories.map((category: string, index: number) => (
+                    <p key={index} className="text-primary">
+                      <Link href={`/categories/${category.toLowerCase()}`}>
+                        <Chip color="primary" className="px-2 pt-1">
+                          # {category}
+                        </Chip>
+                      </Link>
+                    </p>
+                  ))}
                 </div>
                 <span className="text-sm">{post.date}</span>
               </div>
@@ -82,17 +82,19 @@ const RelatedPosts: React.FC<{ categories: string[] }> = ({ categories }) => {
               </p>
               <div className="flex justify-between items-center">
                 <div className="flex items-center space-x-4">
-                  <Avatar src="/author/author.jpg" size="sm" className="w-fit aspect-square object-fill border border-orange-400"/>
-                  <span className="font-medium dark:text-white">
-                    {post.author}
-                  </span>
+                  <Avatar
+                    src="/author/author.jpg"
+                    size="sm"
+                    className="w-fit aspect-square object-fill border border-orange-400"
+                  />
+                  <span className="font-medium">{post.author}</span>
                 </div>
                 <Link
                   href={post.path}
-                  className="flex items-center text-primary"
+                  className="flex items-center gap-[2px] text-primary"
                 >
                   Read more
-                  <MoveRight size={16} />
+                  <ChevronRight size={14} />
                 </Link>
               </div>
             </article>
