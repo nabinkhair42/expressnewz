@@ -78,7 +78,7 @@ const TrendingPost: React.FC = () => {
     <div className="flex flex-col p-4 px-6 gap-4 xl:gap-6 rounded-md max-w-sm">
       <h1 className="text-2xl font-bold flex gap-2 items-center">
         <TrendingUp className="text-primary" />
-        Trending Posts:
+        ट्रेन्डिङ:
       </h1>
       <Separator />
       {posts.length === 0 ? (

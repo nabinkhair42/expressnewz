@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { Bookmark, Clock12, PenIcon } from "lucide-react";
 import { TrendingPostSkeleton } from "../skeletons/TrendingPost";
-import { Separator } from "@/components/ui/separator"
+import { Separator } from "@/components/ui/separator";
 
 interface Post {
   slug: string;
@@ -65,9 +65,9 @@ const CategorizedPost: React.FC = () => {
     <div className="flex flex-col p-4 pt-6 px-6 gap-4 xl:gap-6 max-w-sm">
       <h1 className="text-2xl font-bold flex gap-2 items-center">
         <Bookmark className="text-primary" />
-        Politics
+        राजनीति
       </h1>
-      <Separator/>
+      <Separator />
       {posts.length === 0 ? (
         <p>No posts available</p>
       ) : (
@@ -87,7 +87,7 @@ const CategorizedPost: React.FC = () => {
                   </div>
                 </div>
               </div>
-              <Separator/>
+              <Separator />
             </Link>
           </div>
         ))

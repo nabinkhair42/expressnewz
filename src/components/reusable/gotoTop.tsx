@@ -22,7 +22,7 @@ const GoToTopButton = () => {
       {isVisible && (
         <motion.button
           onClick={scrollToTop}
-          className="fixed bottom-5 right-5 p-3 bg-primary text-white rounded-full shadow-lg"
+          className="fixed bottom-5 right-5 p-3 bg-primary text-white rounded-full shadow-lg z-[999]"
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
         >

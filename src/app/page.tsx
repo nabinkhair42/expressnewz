@@ -7,6 +7,7 @@ import TrendingPost from "@/components/widgets/TrendingPost";
 import CategorizedPost from "@/components/widgets/CategorizedPost";
 import BelowLatestPost from "@/components/adsLayout/BelowLatestPost";
 import MoreNews from "@/components/widgets/MoreNews";
+import Rashifal from "@/components/widgets/Rashifal";
 const page = () => {
   return (
     <div className="overflow-x-clip">
@@ -22,9 +23,14 @@ const page = () => {
           <CategorizedPost />
         </div>
       </div>
-      <BelowLatestPost />
-      <MoreNews />
-      <Carousel />
+      
+      <div className="flex flex-col gap-12 items-center justify-center">
+        <BelowLatestPost />
+        <MoreNews />
+        <Rashifal />
+        <BelowLatestPost />
+        <Carousel />
+      </div>
     </div>
   );
 };

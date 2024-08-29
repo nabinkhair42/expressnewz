@@ -106,7 +106,7 @@ export const Carousel = ({ initialScroll = 0 }: { initialScroll?: number }) => {
           सिफारिस गरिएको समाचार
         </div>
         <div
-          className="flex w-full overflow-x-scroll overscroll-x-auto scroll-smooth [scrollbar-width:none]"
+          className="flex w-full container overflow-x-scroll overscroll-x-auto scroll-smooth [scrollbar-width:none]"
           ref={carouselRef}
           onScroll={checkScrollability}
         >
