@@ -47,7 +47,7 @@ const MoreNews = () => {
       <div id="title" className="text-4xl text-primary font-extrabold">
         समाचार
       </div>
-      <div className="grid grid-cols-2 gap-4 container">
+      <div className="grid md:grid-cols-2 gap-4 container">
         {posts.length === 0 ? (
           <p>No posts available.</p>
         ) : (
