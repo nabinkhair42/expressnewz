@@ -43,7 +43,7 @@ const MoreNews = () => {
     fetchPosts();
   }, []);
   return (
-    <div className="mt-4">
+    <div className="mt-4 w-full flex flex-col gap-4">
       <div id="title" className="text-4xl text-primary font-extrabold">
         समाचार
       </div>

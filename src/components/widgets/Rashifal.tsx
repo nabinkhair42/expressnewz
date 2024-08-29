@@ -86,15 +86,15 @@ const RashifalDetails = [
 
 const Rashifal = () => {
   return (
-    <div>
+    <div className="mt-4 w-full flex flex-col gap-4">
       <div id="title" className="text-4xl text-primary font-extrabold">
         राशिफल
       </div>
-      <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 container mt-4">
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 container">
         {RashifalDetails.map((item, index: number) => (
           <Card
             key={index}
-            className=" p-4 rounded-lg shadow-md flex gap-2 flex-col items-center justify-center"
+            className=" p-4 rounded-lg shadow-md flex gap-2 flex-col items-center justify-center "
           >
             <div className="bg-orange-200 p-1 w-20 h-20 flex items-center justify-center rounded-full aspect-square">
               <Image
