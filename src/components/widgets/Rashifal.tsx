@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+import React, { useEffect, useState } from "react";
+import Image from "next/image";
 import Brish from "/public/rashifall/brish.png";
 import Karkat from "/public/rashifall/karkat.png";
 import Kumbha from "/public/rashifall/kumbha.png";
@@ -11,94 +13,113 @@ import Vrishchik from "/public/rashifall/vrishchik.png";
 import Dhanu from "/public/rashifall/dhanu.png";
 import Kanya from "/public/rashifall/kanya.png";
 import Meen from "/public/rashifall/meen.png";
-import Image from "next/image";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 
-const RashifalDetails = [
-  {
-    image: Mesh,
-    initials: "चु, चे, चो, ला, लि, लु, ले, लो, अ",
-    title: "मेष",
-  },
-  {
-    image: Brish,
-    initials: "इ, उ, ए, ओ, बा, बि, बु, बे, बो",
-    title: "वृष",
-  },
-  {
-    image: Mithun,
-    initials: "का, की, कु, घ, ङ, छ, के, को, ह",
-    title: "मिथुन",
-  },
-  {
-    image: Karkat,
-    initials: "हि, हु, हे, हो, डा, डि, डु, डे, डो",
-    title: "कर्कट",
-  },
-  {
-    image: Singh,
-    initials: "मा, मि, मु, मे, मो, टा, टि, टु, टे",
-    title: "सिंह",
-  },
-  {
-    image: Kanya,
-    initials: "टो, प, पि, पु, ष, ण, ठ, पे, पो",
-    title: "कन्या",
-  },
-  {
-    image: Tula,
-    initials: "र, रि, रु, रे, रो, ता, ति, तु, ते",
-    title: "तुला",
-  },
-  {
-    image: Vrishchik,
-    initials: "तो, ना, नि, नु, ने, नो, या, यि, यु",
-    title: "वृश्चिक",
-  },
-  {
-    image: Dhanu,
-    initials: "ये, यो, भ, भि, भु, ध, फा, ढ, भे",
-    title: "धनु",
-  },
-  {
-    image: Makar,
-    initials: "भो, ज, जि, खि, खु, खे, खो, गा, गि",
-    title: "मकर",
-  },
-  {
-    image: Kumbha,
-    initials: "गु, गे, गो, सा, सि, सु, से, सो, द",
-    title: "कुम्भ",
-  },
-  {
-    image: Meen,
-    initials: "दि, दु, थ, झ, ञ, दे, दो, च, चि",
-    title: "मीन",
-  },
-];
+// Define a type for the fetched data
+type RashifalItem = {
+  name: string;
+  value: string;
+};
 
 const Rashifal = () => {
+  const [rashifalDetails, setRashifalDetails] = useState<any[]>([]);
+
+  useEffect(() => {
+    const fetchRashifal = async () => {
+      try {
+        const response = await fetch("/api/rashifal");
+        const data: RashifalItem[] = await response.json();
+
+        // Map JSON data to the expected structure
+        const mappedData = data.map((item) => {
+          // Map the name to the corresponding image and initials
+          let image;
+          let initials = "";
+          switch (item.name.split(" ")[0]) {
+            case "मेष":
+              image = Mesh;
+              initials = "चु, चे, चो, ला, लि, लु, ले, लो, अ";
+              break;
+            case "वृष":
+              image = Brish;
+              initials = "इ, उ, ए, ओ, बा, बि, बु, बे, बो";
+              break;
+            case "मिथुन":
+              image = Mithun;
+              initials = "का, की, कु, घ, ङ, छ, के, को, ह";
+              break;
+            case "कर्कट":
+              image = Karkat;
+              initials = "हि, हु, हे, हो, डा, डि, डु, डे, डो";
+              break;
+            case "सिंह":
+              image = Singh;
+              initials = "मा, मि, मु, मे, मो, टा, टि, टु, टे";
+              break;
+            case "कन्या":
+              image = Kanya;
+              initials = "टो, प, पि, पु, ष, ण, ठ, पे, पो";
+              break;
+            case "तुला":
+              image = Tula;
+              initials = "र, रि, रु, रे, रो, ता, ति, तु, ते";
+              break;
+            case "वृश्चिक":
+              image = Vrishchik;
+              initials = "तो, ना, नि, नु, ने, नो, या, यि, यु";
+              break;
+            case "धनु":
+              image = Dhanu;
+              initials = "ये, यो, भ, भि, भु, ध, फा, ढ, भे";
+              break;
+            case "मकर":
+              image = Makar;
+              initials = "भो, ज, जि, खि, खु, खे, खो, गा, गि";
+              break;
+            case "कुम्भ":
+              image = Kumbha;
+              initials = "गु, गे, गो, सा, सि, सु, से, सो, द";
+              break;
+            case "मीन":
+              image = Meen;
+              initials = "दि, दु, थ, झ, ञ, दे, दो, च, चि";
+              break;
+            default:
+              image = null; // Handle unknown names if needed
+              initials = ""; // Handle unknown initials if needed
+          }
+
+          return {
+            image,
+            initials,
+            title: item.name,
+            description: item.value,
+          };
+        });
+
+        setRashifalDetails(mappedData);
+      } catch (error) {
+        console.error("Error fetching rashifal data:", error);
+      }
+    };
+
+    fetchRashifal();
+  }, []);
+
   return (
     <div className="mt-4 w-full flex flex-col gap-4">
       <div id="title" className="text-4xl text-primary font-extrabold">
         राशिफल
       </div>
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 container">
-        {RashifalDetails.map((item, index: number) => (
+        {rashifalDetails.map((item, index) => (
           <Card
             key={index}
-            className=" p-4 rounded-lg shadow-md flex gap-2 flex-col items-center justify-center "
+            className="p-4 rounded-lg shadow-md flex gap-2 flex-col items-center justify-center"
           >
             <div className="bg-orange-200 p-1 w-20 h-20 flex items-center justify-center rounded-full aspect-square">
               <Image
-                src={item.image.src}
+                src={item.image?.src || ""}
                 alt={item.title}
                 height={500}
                 width={500}
@@ -106,7 +127,12 @@ const Rashifal = () => {
               />
             </div>
             <h2 className="text-2xl font-bold text-center">{item.title}</h2>
-            <p className="text-muted-foreground text-center">{item.initials}</p>
+            <p className="text-muted-foreground text-center">
+              ({item.initials})
+            </p>
+            <p className="text-muted-foreground text-center">
+              {item.description}
+            </p>
           </Card>
         ))}
       </div>
