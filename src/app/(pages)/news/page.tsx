@@ -72,7 +72,9 @@ const NewsPage = async () => {
                   />
                 </CardHeader>
                 <CardFooter className="flex flex-col p-4 flex-grow items-start">
-                  <CardTitle className="text-[18px]">{post.title}</CardTitle>
+                  <CardTitle className="text-[18px] hover:text-primary transition-colors">
+                    {post.title}
+                  </CardTitle>
                   <CardDescription className="flex flex-col gap-2 mt-2">
                     <div className="flex items-center gap-2 text-sm text-muted-foreground">
                       <Clock12 size={16} />

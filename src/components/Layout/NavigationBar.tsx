@@ -173,6 +173,9 @@ const NavigationMenu = () => {
               </Button>
             </div>
             <ul className="flex flex-col gap-4 p-4 w-full">
+              <li className="md:hidden">
+                <Weather />
+              </li>
               {Links.map((link, index) => (
                 <li key={index}>
                   <Link

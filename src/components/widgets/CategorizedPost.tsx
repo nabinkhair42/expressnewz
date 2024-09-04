@@ -62,7 +62,7 @@ const CategorizedPost: React.FC = () => {
   if (error) return <p>Error: {error}</p>;
 
   return (
-    <div className="flex flex-col p-4 pt-6 px-6 gap-4 xl:gap-6 max-w-sm">
+    <div className="flex flex-col p-4 pt-6 px-6 gap-4 xl:gap-6">
       <h1 className="text-2xl font-bold flex gap-2 items-center">
         <Bookmark className="text-primary" />
         राजनीति
@@ -74,7 +74,9 @@ const CategorizedPost: React.FC = () => {
         posts.slice(0, 3).map((post) => (
           <div key={post.slug}>
             <Link href={post.path} className="flex flex-col gap-2 ">
-              <h2 className="text-lg font-bold">{post.title}</h2>
+              <h2 className="text-lg font-bold hover:text-primary transition-colors">
+                {post.title}
+              </h2>
               <div className="flex justify-start items-start gap-2">
                 <div className="text-muted-foreground flex flex-col gap-2 md:flex-row">
                   <div className="flex items-center gap-2 text-sm">

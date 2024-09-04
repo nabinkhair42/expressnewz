@@ -8,7 +8,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Divider } from "@nextui-org/react";
 import { Gold, Silver } from "@/icons/icons";
 import Link from "next/link";
 import { GoldSkeleton } from "../skeletons/GoldSkeleton";
@@ -45,10 +44,12 @@ const PriceCard: React.FC = () => {
   }, []);
 
   return (
-    <div>
-      <Card className="max-w-sm overflow-x-auto pt-6 px-6">
+    <div className="w-full">
+      <div className="pt-6 px-6">
         <CardHeader>
-          <CardTitle className="text-md">सुन र चाँदीको मूल्य</CardTitle>
+          <CardTitle className="text-2xl font-bold flex gap-2 items-center">
+            सुन र चाँदीको मूल्य
+          </CardTitle>
           <CardDescription className="text-sm">
             नेपाल राष्ट्र बैंकद्वारा प्रकाशित सुन र चाँदीको मूल्य
           </CardDescription>
@@ -88,7 +89,7 @@ const PriceCard: React.FC = () => {
             थप विवरणहरू
           </Link>
         </div>
-      </Card>
+      </div>
     </div>
   );
 };
