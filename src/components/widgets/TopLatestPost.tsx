@@ -1,5 +1,4 @@
 "use client";
-
 import { Avatar, Divider } from "@nextui-org/react";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
@@ -60,7 +59,7 @@ const TopLatestPost: React.FC = () => {
           <div key={post.title}>
             <Link href={post.path} className="flex flex-col gap-2">
               <div className="p-4 rounded-md flex flex-col items-center justify-center gap-2">
-                <h2 className="text-3xl font-bold text-center hover:text-primary transition-colors">{post.title}</h2>
+                <h2 className="text-4xl font-bold text-center hover:text-primary transition-colors">{post.title}</h2>
                 <div className="flex md:gap-6 gap-2 items-center justify-center text-nowrap">
                   <p className="flex items-center justify-center gap-2 text-primary">
                     <Avatar

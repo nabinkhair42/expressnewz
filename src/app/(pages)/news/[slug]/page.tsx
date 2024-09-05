@@ -4,8 +4,6 @@ import path from "path";
 import matter from "gray-matter";
 import { markdownToHtml } from "@/lib/blogmarkdownToHtml";
 import { notFound } from "next/navigation";
-import Image from "next/image";
-import { Calendar } from "lucide-react";
 import { Avatar, Chip } from "@nextui-org/react";
 import Link from "next/link";
 import { ShareMenu } from "@/components/reusable/share";
@@ -56,7 +54,7 @@ const BlogPost = async ({ params }: { params: { slug: string } }) => {
 
         <div className="max-w-3xl mx-auto">
           <div className="rounded-t-md bg-background -mt-32 px-5 sm:px-10 border py-10">
-            <h1 className="font-bold text-3xl mb-2">{data.title}</h1>
+            <h1 className="font-bold text-[30px] mb-2">{data.title}</h1>
 
             {/* Author Details */}
             <div className="flex md:justify-between md:items-center items-start  justify-start  flex-col md:flex-row">
@@ -77,11 +75,12 @@ const BlogPost = async ({ params }: { params: { slug: string } }) => {
             </div>
 
             {/* Complete News Goes Here */}
-            <p className="leading-8 text-[18px] text-justify mt-4">
+            <p className="leading-8 text-[20px] text-justify mt-4">
               <div
                 className="prose"
                 dangerouslySetInnerHTML={{ __html: htmlContent }}
               />
+              <AboveRelatedPost />
             </p>
 
             {/* Categories Displayed */}
