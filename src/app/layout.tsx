@@ -8,6 +8,7 @@ import { Toaster } from "react-hot-toast";
 import Footer from "@/components/Layout/Footer";
 import GotoTop from "@/components/reusable/gotoTop";
 import SmoothScrolling from "@/components/reusable/SmoothScrolling";
+import AdPopup from "@/components/adsLayout/popupads";
 
 const inter = Mukta({
   weight: ["200", "400", "600"],
@@ -34,6 +35,7 @@ export default function RootLayout({
         disableTransitionOnChange
       >
         <body className={inter.className} suppressHydrationWarning={true}>
+          <AdPopup />
           <NavigationBar />
           {/* <DateTemperature /> */}
           <SmoothScrolling>
