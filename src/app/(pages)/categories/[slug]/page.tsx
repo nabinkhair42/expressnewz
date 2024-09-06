@@ -75,10 +75,10 @@ const BlogPost = async ({ params }: { params: { slug: string } }) => {
                 />
               </CardHeader>
               <CardFooter className="flex flex-col items-start mt-2 gap-1">
-                <CardTitle className="text-[18px] hover:text-primary transition-colors">
+                <CardTitle className="text-2xl hover:text-primary transition-colors">
                   {post.title}
                 </CardTitle>
-                <CardDescription className="flex flex-col gap-2">
+                <CardDescription className="flex flex-col gap-2 mt-2 md:text-md text-lg">
                   <div className="flex items-center gap-2">
                     <Clock12 size={16} />
                     {post.date}
