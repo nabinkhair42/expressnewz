@@ -56,11 +56,13 @@ const TopLatestPost: React.FC = () => {
       ) : (
         // Only display the top 3 sorted posts
         posts.slice(0, 3).map((post, index) => (
-          <div key={post.title}>
+          <div key={post.title} className="w-full pt-6">
             <Link href={post.path} className="flex flex-col gap-6">
               <div className="p-4 rounded-md flex flex-col items-center justify-center gap-2">
-                <h2 className="text-4xl font-bold text-center hover:text-primary transition-colors">{post.title}</h2>
-                <div className="flex md:gap-6 gap-2 items-center justify-center text-nowrap">
+                <h2 className="text-4xl font-bold text-center hover:text-primary transition-colors">
+                  {post.title}
+                </h2>
+                <div className="flex md:gap-6 gap-3 items-center justify-center text-lg">
                   <p className="flex items-center justify-center gap-2 text-primary">
                     <Avatar
                       src="/author/author.jpg"
@@ -73,8 +75,18 @@ const TopLatestPost: React.FC = () => {
                   </p>
                   <p className="text-muted-foreground">{post.date}</p>
                 </div>
-                {/* //For the last Post show image also  */}
               </div>
+
+              {/* Add Image for Last Post only */}
+              {index === 2 && (
+                <div className="flex items-center justify-center">
+                  <img
+                    src={post.image}
+                    alt="image"
+                    className="w-full h-96 object-cover rounded-sm"
+                  />
+                </div>
+              )}
               <Separator />
             </Link>
             <Divider />
