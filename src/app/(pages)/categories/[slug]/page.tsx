@@ -54,7 +54,7 @@ const BlogPost = async ({ params }: { params: { slug: string } }) => {
     p.categories.includes(slug.toLowerCase())
   );
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-8">
       <h1 className="text-5xl text-primary font-extrabold text-center outline-dotted">
         {slug.charAt(0).toUpperCase() + slug.slice(1)} News
       </h1>
