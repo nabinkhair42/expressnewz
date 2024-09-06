@@ -47,10 +47,10 @@ const PriceCard: React.FC = () => {
     <div className="w-full">
       <div className="pt-6 px-6">
         <CardHeader>
-          <CardTitle className="text-2xl font-bold flex gap-2 items-center">
+          <CardTitle className="text-3xl font-bold flex gap-2 items-center">
             सुन र चाँदीको मूल्य
           </CardTitle>
-          <CardDescription className="text-sm">
+          <CardDescription className="md:text-lg text-xl">
             नेपाल राष्ट्र बैंकद्वारा प्रकाशित सुन र चाँदीको मूल्य
           </CardDescription>
         </CardHeader>
@@ -63,7 +63,10 @@ const PriceCard: React.FC = () => {
             ) : prices.length > 0 ? (
               //Show first 3 content
               prices.slice(0, 3).map((price, index) => (
-                <div key={index} className="flex justify-between items-center">
+                <div
+                  key={index}
+                  className="flex justify-between items-center text-xl md:text-md xl:text-xl"
+                >
                   <div className="flex items-center gap-2">
                     {price.name.includes("Gold") ? (
                       <Gold className="text-yellow-500" />

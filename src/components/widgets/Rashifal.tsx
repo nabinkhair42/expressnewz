@@ -108,14 +108,14 @@ const Rashifal = () => {
 
   return (
     <div className="mt-4 w-full flex flex-col gap-4">
-      <div id="title" className="text-4xl text-primary font-extrabold">
+      <div id="title" className="text-5xl text-primary font-extrabold text-center outline-dotted">
         राशिफल
       </div>
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 container">
         {rashifalDetails.map((item, index) => (
           <Card
             key={index}
-            className="p-4 rounded-lg shadow-md flex gap-2 flex-col items-center justify-center"
+            className="p-4 rounded-lg shadow-md flex gap-3 flex-col items-center justify-center"
           >
             <div className="bg-orange-200 p-1 w-20 h-20 flex items-center justify-center rounded-full aspect-square">
               <Image
@@ -126,11 +126,15 @@ const Rashifal = () => {
                 className="w-16 h-16 object-cover rounded-full mb-2"
               />
             </div>
-            <h2 className="text-2xl font-bold text-center">{item.title}</h2>
-            <p className="text-muted-foreground text-center">
+
+            <h2 className="text-3xl font-bold text-center">
+              {item.title.split(" ")[0]}
+            </h2>
+
+            <p className="text-muted-foreground text-center text-lg">
               ({item.initials})
             </p>
-            <p className="text-muted-foreground text-center">
+            <p className="text-muted-foreground text-center text-xl">
               {item.description}
             </p>
           </Card>

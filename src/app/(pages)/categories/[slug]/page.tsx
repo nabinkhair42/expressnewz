@@ -11,7 +11,7 @@ import {
   CardHeader,
   CardFooter,
 } from "@/components/ui/card";
-import { Clock12, PenIcon } from "lucide-react";
+import { Clock12, PenIcon, UserRoundPen } from "lucide-react";
 import Image from "next/image";
 
 type Post = {
@@ -62,23 +62,22 @@ const BlogPost = async ({ params }: { params: { slug: string } }) => {
         {newPosts.map((post) => (
           <Card
             key={post.slug}
-            className="hover:shadow-lg transition-shadow bg-inherit flex flex-col bg-background rounded-lg overflow-hidden"
+            className="hover:shadow-lg transition-shadow bg-inherit flex flex-col bg-background rounded-lg overflow-hidden border-none shadow-none"
           >
-            <Link
-              href={`/news/${post.slug}`}
-              className="flex flex-col justify-around"
-            >
-              <CardHeader className="h-40">
+            <Link href={`/news/${post.slug}`} className="flex flex-col h-full">
+              <CardHeader className="relative overflow-hidden h-40">
                 <Image
                   src={post.image}
                   alt={post.title}
-                  height="400"
-                  width="400"
-                  className="rounded-t-md shadow-sm h-40"
+                  layout="fill"
+                  objectFit="cover"
+                  className="w-full h-full rounded-t-lg shadow-sm"
                 />
               </CardHeader>
               <CardFooter className="flex flex-col items-start mt-2 gap-1">
-                <CardTitle className="text-[18px] h-24 hover:text-primary transition-colors">{post.title}</CardTitle>
+                <CardTitle className="text-[18px] hover:text-primary transition-colors">
+                  {post.title}
+                </CardTitle>
                 <CardDescription className="flex flex-col gap-2">
                   <div className="flex items-center gap-2">
                     <Clock12 size={16} />
@@ -86,7 +85,7 @@ const BlogPost = async ({ params }: { params: { slug: string } }) => {
                   </div>
 
                   <div className="flex items-center gap-2">
-                    <PenIcon width={16} />
+                    <UserRoundPen width={16} />
                     {post.author}
                   </div>
                 </CardDescription>

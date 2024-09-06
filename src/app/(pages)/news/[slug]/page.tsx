@@ -73,7 +73,8 @@ const BlogPost = async ({ params }: { params: { slug: string } }) => {
               </div>
               <ShareMenu />
             </div>
-
+            {/* Advertise */}
+            <AboveRelatedPost />
             {/* Complete News Goes Here */}
             <p className="leading-8 text-[20px] text-justify mt-4">
               <div

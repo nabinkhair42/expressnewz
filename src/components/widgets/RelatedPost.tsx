@@ -51,9 +51,17 @@ const RelatedPosts: React.FC<{ categories: string[] }> = ({ categories }) => {
   if (error) return <p>{error}</p>;
 
   return (
-    <section className="bg-background mt-12">
-      <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
-        <h2 className="text-2xl font-bold mb-4">Related Posts</h2>
+    <section className="bg-background">
+      <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6 flex flex-col gap-8">
+        <div
+          id="title"
+          सिफारिस
+          गरिएको
+          समा
+          className="text-5xl py-2 text-primary font-extrabold text-center outline-dotted"
+        >
+          सिफारिस गरिएको समाचार
+        </div>
         <div className="grid gap-8 lg:grid-cols-2">
           {posts.map((post) => (
             <article
@@ -61,26 +69,26 @@ const RelatedPosts: React.FC<{ categories: string[] }> = ({ categories }) => {
               className="p-6 rounded-lg border shadow-md bg-card"
             >
               <div className="flex justify-between items-start mb-5 text-muted-foreground flex-col md:flex-row gap-2">
-                <div className="flex gap-2 md:flex-row flex-col">
+                <div className="flex gap-2 flex-row">
                   {post.categories.map((category: string, index: number) => (
                     <p key={index} className="text-primary">
                       <Link href={`/categories/${category.toLowerCase()}`}>
-                        <Chip color="primary" className="px-2 pt-1">
+                        <Chip color="primary" className="p-1">
                           # {category}
                         </Chip>
                       </Link>
                     </p>
                   ))}
                 </div>
-                <span className="text-sm">{post.date}</span>
+                <span className="text-lg">{post.date}</span>
               </div>
-              <h2 className="mb-2 text-xl font-bold tracking-tight text-justify">
+              <h2 className="mb-2 text-3xl font-bold tracking-tight hover:text-primary transition-colors">
                 <Link href={post.path}>{post.title}</Link>
               </h2>
-              <p className="mb-5 font-light text-muted-foreground text-justify">
+              <p className="mb-5 font-light text-muted-foreground text-xl text-justify">
                 {post.content.substring(0, 150)}...
               </p>
-              <div className="flex justify-between items-center">
+              <div className="flex justify-between items-center text-lg">
                 <div className="flex items-center space-x-4">
                   <Avatar
                     src="/author/author.jpg"

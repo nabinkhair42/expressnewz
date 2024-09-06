@@ -57,7 +57,7 @@ const TopLatestPost: React.FC = () => {
         // Only display the top 3 sorted posts
         posts.slice(0, 3).map((post, index) => (
           <div key={post.title}>
-            <Link href={post.path} className="flex flex-col gap-2">
+            <Link href={post.path} className="flex flex-col gap-6">
               <div className="p-4 rounded-md flex flex-col items-center justify-center gap-2">
                 <h2 className="text-4xl font-bold text-center hover:text-primary transition-colors">{post.title}</h2>
                 <div className="flex md:gap-6 gap-2 items-center justify-center text-nowrap">

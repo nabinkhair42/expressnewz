@@ -11,7 +11,7 @@ import {
   CardFooter,
 } from "@/components/ui/card";
 import Image from "next/image";
-import { Clock12, PenIcon } from "lucide-react";
+import { Clock12, PenIcon, UserRoundPen } from "lucide-react";
 import { PostSkeleton } from "@/components/skeletons/PostSkeleton";
 type Post = {
   slug: string;
@@ -66,22 +66,22 @@ const NewsPage = async () => {
                   <Image
                     src={post.image}
                     alt={post.title}
-                    layout="fill" // Ensure the image covers the area without distortion
+                    layout="fill"
                     objectFit="cover"
                     className="w-full h-full rounded-t-lg shadow-sm"
                   />
                 </CardHeader>
                 <CardFooter className="flex flex-col p-4 flex-grow items-start">
-                  <CardTitle className="text-[18px] hover:text-primary transition-colors">
+                  <CardTitle className="text-2xl hover:text-primary transition-colors">
                     {post.title}
                   </CardTitle>
-                  <CardDescription className="flex flex-col gap-2 mt-2">
-                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                  <CardDescription className="flex flex-col gap-2 mt-2 md:text-md text-lg">
+                    <div className="flex items-center gap-2">
                       <Clock12 size={16} />
                       {post.date}
                     </div>
-                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                      <PenIcon width={16} />
+                    <div className="flex items-center gap-2">
+                      <UserRoundPen width={16} />
                       {post.author}
                     </div>
                   </CardDescription>

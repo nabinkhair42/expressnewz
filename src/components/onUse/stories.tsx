@@ -102,7 +102,10 @@ export const Carousel = ({ initialScroll = 0 }: { initialScroll?: number }) => {
       value={{ onCardClose: handleCardClose, currentIndex }}
     >
       <div className="relative w-full py-5 flex gap-4 flex-col">
-        <div id="title" className="text-4xl text-primary font-extrabold">
+        <div
+          id="title"
+          className="text-5xl text-primary font-extrabold text-center outline-dotted"
+        >
           सिफारिस गरिएको समाचार
         </div>
         <div

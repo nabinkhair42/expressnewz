@@ -75,8 +75,8 @@ const TrendingPost: React.FC = () => {
   if (error) return <p>Error: {error}</p>;
 
   return (
-    <div className="flex flex-col p-4 px-6 gap-4 xl:gap-6 rounded-md">
-      <h1 className="text-2xl font-bold flex gap-2 items-center">
+    <div className="flex flex-col p-4 px-6 gap-4 xl:gap-6 rounded-md w-full">
+      <h1 className="text-3xl font-bold flex gap-2 items-center">
         <TrendingUp className="text-primary" />
         ट्रेन्डिङ:
       </h1>
@@ -87,16 +87,16 @@ const TrendingPost: React.FC = () => {
         posts.slice(0, 3).map((post) => (
           <div key={post.slug}>
             <Link href={post.path} className="flex flex-col gap-2 ">
-              <h2 className="text-lg font-bold hover:text-primary transition-colors">
+              <h2 className="md:text-xl text-3xl  font-bold hover:text-primary transition-colors">
                 {post.title}
               </h2>
               <div className="flex justify-start items-start gap-2">
-                <div className="text-muted-foreground flex flex-col gap-2 md:flex-row">
-                  <div className="flex items-center gap-2 text-sm">
+                <div className="text-muted-foreground flex flex-col gap-2 md:flex-row md:text-md text-lg">
+                  <div className="flex items-center gap-2 ">
                     <Clock12 size={16} />
                     <span>{post.date}</span>
                   </div>
-                  <div className="flex items-center gap-2 text-sm">
+                  <div className="flex items-center gap-2">
                     <PenIcon size={16} />
                     <span>{post.author}</span>
                   </div>

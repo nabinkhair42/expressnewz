@@ -23,10 +23,11 @@ const page = () => {
           <CategorizedPost />
         </div>
       </div>
-      
+
       <div className="flex flex-col gap-12 items-center justify-center">
         <BelowLatestPost />
         <MoreNews />
+        <BelowLatestPost />
         <Rashifal />
         <BelowLatestPost />
         <Carousel />
