@@ -55,9 +55,6 @@ const RelatedPosts: React.FC<{ categories: string[] }> = ({ categories }) => {
       <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6 flex flex-col gap-8">
         <div
           id="title"
-          सिफारिस
-          गरिएको
-          समा
           className="text-5xl py-2 text-primary font-extrabold text-center outline-dotted"
         >
           सिफारिस गरिएको समाचार
