@@ -55,7 +55,7 @@ const BlogPost = async ({ params }: { params: { slug: string } }) => {
   );
   return (
     <div className="flex flex-col gap-4">
-      <h1 className="text-xl font-bold">
+      <h1 className="text-5xl text-primary font-extrabold text-center outline-dotted">
         {slug.charAt(0).toUpperCase() + slug.slice(1)} News
       </h1>
       <ul className="grid grid-cols-[repeat(auto-fill,_minmax(250px,_1fr))] gap-4">
