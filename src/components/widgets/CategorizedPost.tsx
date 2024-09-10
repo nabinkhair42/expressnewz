@@ -5,6 +5,8 @@ import { Bookmark, Clock12, PenIcon } from "lucide-react";
 import { TrendingPostSkeleton } from "../skeletons/TrendingPost";
 import { Separator } from "@/components/ui/separator";
 
+const API_TOKEN = process.env.NEXT_PUBLIC_API_TOKEN;
+
 interface Post {
   slug: string;
   title: string;
@@ -15,10 +17,15 @@ interface Post {
   categories: string[];
 }
 
-// Function to fetch posts based on the category
+// Function to fetch posts based on the category with token
 const fetchPosts = async (category: string): Promise<Post[]> => {
   const response = await fetch(
-    `/api/posts?category=${encodeURIComponent(category)}`
+    `/api/posts?category=${encodeURIComponent(category)}`,
+    {
+      headers: {
+        Authorization: `Bearer ${API_TOKEN}`,
+      },
+    }
   );
   if (!response.ok) {
     throw new Error("Network response was not ok");

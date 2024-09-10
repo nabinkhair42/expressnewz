@@ -19,7 +19,13 @@ interface Post {
 }
 
 async function fetchPosts(): Promise<Post[]> {
-  const response = await fetch("/api/posts");
+  const API_TOKEN = process.env.NEXT_PUBLIC_API_TOKEN;
+
+  const response = await fetch("/api/posts", {
+    headers: {
+      Authorization: `Bearer ${API_TOKEN}`,
+    },
+  });
   if (!response.ok) {
     throw new Error("Failed to fetch posts");
   }

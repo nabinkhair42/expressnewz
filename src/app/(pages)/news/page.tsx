@@ -23,6 +23,7 @@ interface Post {
   path: string;
 }
 
+const API_TOKEN = process.env.NEXT_PUBLIC_API_TOKEN
 const AllPosts: React.FC = () => {
   const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
@@ -31,7 +32,11 @@ const AllPosts: React.FC = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await fetch("/api/posts");
+        const response = await fetch("/api/posts", {
+          headers: {
+            Authorization: `Bearer ${API_TOKEN}`,
+          },
+        });
         if (!response.ok) {
           throw new Error("Failed to fetch posts");
         }

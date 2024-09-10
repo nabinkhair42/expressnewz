@@ -15,6 +15,7 @@ type Post = {
 };
 
 const RelatedPosts: React.FC<{ categories: string[] }> = ({ categories }) => {
+  const API_TOKEN = process.env.NEXT_PUBLIC_API_TOKEN;
   const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -22,7 +23,11 @@ const RelatedPosts: React.FC<{ categories: string[] }> = ({ categories }) => {
   useEffect(() => {
     async function fetchPosts() {
       try {
-        const response = await fetch(`/api/posts?category=${categories[0]}`);
+        const response = await fetch("/api/posts", {
+          headers: {
+            Authorization: `Bearer ${API_TOKEN}`,
+          },
+        });
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }

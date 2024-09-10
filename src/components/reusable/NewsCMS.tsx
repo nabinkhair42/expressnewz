@@ -14,15 +14,16 @@ import {
 } from "@/components/ui/select";
 import toast from "react-hot-toast";
 import { Chip } from "@nextui-org/react";
+import BikramSambat from "@askbuddie/bikram-sambat";
 
 interface Post {
   title: string;
-  date: string;
+  date: string; // Nepali date format
   author: string;
   categories: string[];
   image: File | null;
   content: string;
-  path: string; // Add path to the post interface
+  path: string;
 }
 
 const predefinedCategories = [
@@ -43,7 +44,7 @@ const NewsCMS = () => {
     categories: [],
     image: null,
     content: "",
-    path: "", // Initialize path
+    path: "",
   });
   const [isLoading, setIsLoading] = useState(false);
   const [customCategory, setCustomCategory] = useState("");
@@ -54,6 +55,14 @@ const NewsCMS = () => {
   ) => {
     const { name, value } = e.target;
     setNewPost((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleDateChange = (date: string) => {
+    const bsDate = new BikramSambat(date);
+    setNewPost((prev) => ({
+      ...prev,
+      date: bsDate.format("YYYY-MM-DD"), // Adjust this format if needed
+    }));
   };
 
   const handleCategoryChange = (value: string) => {
@@ -90,24 +99,21 @@ const NewsCMS = () => {
     }
   };
 
-  // Function to generate path from title
   const generatePathFromTitle = (title: string) => {
     return title
-      .split(" ") // Split title into words
-      .slice(0, 10) // Take first 10 words
-      .join("-") // Join words with hyphens
-      .replace(/[^\u0900-\u097F\w-]+/g, "") // Remove any non-Nepali, non-alphanumeric characters except hyphens
-      .toLowerCase(); // Convert to lowercase for consistency
+      .split(" ")
+      .slice(0, 10)
+      .join("-")
+      .replace(/[^\u0900-\u097F\w-]+/g, "")
+      .toLowerCase();
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
 
-    // Generate path from title
     const path = generatePathFromTitle(newPost.title);
 
-    // Prepare form data to send to the server
     const formData = new FormData();
     for (const [key, value] of Object.entries(newPost)) {
       if (key === "categories") {
@@ -117,8 +123,7 @@ const NewsCMS = () => {
       }
     }
 
-    // Append the generated path to formData
-    formData.append("path", `/news/${path}`); // Ensure path is included
+    formData.append("path", `/news/${path}`);
 
     try {
       const response = await fetch("/api/submit-news", {
@@ -126,10 +131,8 @@ const NewsCMS = () => {
         body: formData,
       });
       if (!response.ok) throw new Error("Failed to create post");
-      const data = await response.json();
       toast.success("Post created successfully");
 
-      // Reset form
       setNewPost({
         title: "",
         date: "",
@@ -137,7 +140,7 @@ const NewsCMS = () => {
         categories: [],
         image: null,
         content: "",
-        path: "", // Reset path
+        path: "",
       });
     } catch (error) {
       toast.error("Failed to create post");
@@ -148,7 +151,7 @@ const NewsCMS = () => {
 
   return (
     <div className="p-4">
-      <Card className="p-6">
+      <Card className="p-6 bg-inherit shadow-none border-none">
         <CardHeader>
           <CardTitle className="text-center mb-4">
             समाचार पोस्ट सिर्जना गर्नुहोस्
@@ -163,13 +166,16 @@ const NewsCMS = () => {
               onChange={handleInputChange}
               required
             />
-            <Input
-              name="date"
-              type="date"
-              value={newPost.date}
-              onChange={handleInputChange}
-              required
-            />
+            <div>
+              <label htmlFor="date">Date</label>
+              <input
+                type="text"
+                value={newPost.date}
+                onChange={(e) => handleDateChange(e.target.value)}
+                placeholder="Select Date"
+                className="form-control"
+              />
+            </div>
             <Input
               name="author"
               placeholder="पत्रकार"

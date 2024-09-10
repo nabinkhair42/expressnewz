@@ -17,10 +17,16 @@ const MoreNews = () => {
   const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const API_TOKEN = process.env.NEXT_PUBLIC_API_TOKEN;
+
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await fetch("/api/posts");
+        const response = await fetch("/api/posts", {
+          headers: {
+            Authorization: `Bearer ${API_TOKEN}`,
+          },
+        });
         if (!response.ok) {
           throw new Error("Failed to fetch posts");
         }
