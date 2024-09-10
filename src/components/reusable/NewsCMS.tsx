@@ -14,7 +14,6 @@ import {
 } from "@/components/ui/select";
 import toast from "react-hot-toast";
 import { Chip } from "@nextui-org/react";
-import BikramSambat from "@askbuddie/bikram-sambat";
 
 interface Post {
   title: string;
@@ -55,14 +54,6 @@ const NewsCMS = () => {
   ) => {
     const { name, value } = e.target;
     setNewPost((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleDateChange = (date: string) => {
-    const bsDate = new BikramSambat(date);
-    setNewPost((prev) => ({
-      ...prev,
-      date: bsDate.format("YYYY-MM-DD"), // Adjust this format if needed
-    }));
   };
 
   const handleCategoryChange = (value: string) => {
@@ -168,12 +159,12 @@ const NewsCMS = () => {
             />
             <div>
               <label htmlFor="date">Date</label>
-              <input
-                type="text"
+              <Input
+                type="date"
+                name="date"
                 value={newPost.date}
-                onChange={(e) => handleDateChange(e.target.value)}
-                placeholder="Select Date"
-                className="form-control"
+                onChange={handleInputChange}
+                required
               />
             </div>
             <Input
