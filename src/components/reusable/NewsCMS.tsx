@@ -11,7 +11,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useToast } from "@/hooks/use-toast";
+import toast from "react-hot-toast";
 
 interface Post {
   title: string;
@@ -32,7 +32,6 @@ const NewsCMS = () => {
     image: null,
     content: "",
   });
-  const { toast } = useToast();
 
   useEffect(() => {
     fetchPosts();
@@ -45,11 +44,7 @@ const NewsCMS = () => {
       const data = await response.json();
       setPosts(data);
     } catch (error) {
-      toast({
-        title: "Error",
-        description: "Failed to fetch posts. Please try again.",
-        variant: "destructive",
-      });
+      toast.error("Failed to fetch posts");
     }
   };
 
@@ -89,10 +84,7 @@ const NewsCMS = () => {
       });
       if (!response.ok) throw new Error("Failed to create post");
       const data = await response.json();
-      toast({
-        title: "Success",
-        description: `Post created successfully! Post number: ${data.postNumber}`,
-      });
+      toast.success("Post created successfully");
       fetchPosts();
       setNewPost({
         title: "",
@@ -103,11 +95,7 @@ const NewsCMS = () => {
         content: "",
       });
     } catch (error) {
-      toast({
-        title: "Error",
-        description: "Failed to create post. Please try again.",
-        variant: "destructive",
-      });
+      toast.error("Failed to create post");
     }
   };
 
@@ -115,9 +103,9 @@ const NewsCMS = () => {
     <div className="p-4">
       <h1 className="text-2xl font-bold mb-4">News CMS</h1>
 
-      <Card className="mb-8">
+      <Card className="p-6">
         <CardHeader>
-          <CardTitle>Create New Post</CardTitle>
+          <CardTitle className="text-center mb-4">Create New Post</CardTitle>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
