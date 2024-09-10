@@ -30,7 +30,7 @@ export async function GET(request: Request) {
   } catch (error) {
     console.error("Failed to load posts:", error);
     return NextResponse.json(
-      { message: "Failed to load posts", error: error.message },
+      { message: "Failed to load posts", error: (error as Error).message },
       { status: 500 }
     );
   }
