@@ -145,7 +145,7 @@ const NavigationMenu = () => {
           >
             <Weather />
           </div>
-          <Button onClick={notify} className="hidden xl:flex">
+          <Button onClick={notify} className="hidden xl:flex" variant={"outline"}>
             Sign In
           </Button>
           <Button
