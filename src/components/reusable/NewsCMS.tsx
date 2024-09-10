@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -22,6 +22,7 @@ interface Post {
   categories: string[];
   image: File | null;
   content: string;
+  path: string; // Add path to the post interface
 }
 
 const predefinedCategories = [
@@ -42,6 +43,7 @@ const NewsCMS = () => {
     categories: [],
     image: null,
     content: "",
+    path: "", // Initialize path
   });
   const [isLoading, setIsLoading] = useState(false);
   const [customCategory, setCustomCategory] = useState("");
@@ -88,17 +90,35 @@ const NewsCMS = () => {
     }
   };
 
+  // Function to generate path from title
+  const generatePathFromTitle = (title: string) => {
+    return title
+      .split(" ") // Split title into words
+      .slice(0, 10) // Take first 10 words
+      .join("-") // Join words with hyphens
+      .replace(/[^\u0900-\u097F\w-]+/g, "") // Remove any non-Nepali, non-alphanumeric characters except hyphens
+      .toLowerCase(); // Convert to lowercase for consistency
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
+
+    // Generate path from title
+    const path = generatePathFromTitle(newPost.title);
+
+    // Prepare form data to send to the server
     const formData = new FormData();
     for (const [key, value] of Object.entries(newPost)) {
       if (key === "categories") {
         formData.append(key, JSON.stringify(value));
-      } else if (value !== null) {
+      } else if (value !== null && key !== "path") {
         formData.append(key, value);
       }
     }
+
+    // Append the generated path to formData
+    formData.append("path", `/news/${path}`); // Ensure path is included
 
     try {
       const response = await fetch("/api/submit-news", {
@@ -109,6 +129,7 @@ const NewsCMS = () => {
       const data = await response.json();
       toast.success("Post created successfully");
 
+      // Reset form
       setNewPost({
         title: "",
         date: "",
@@ -116,6 +137,7 @@ const NewsCMS = () => {
         categories: [],
         image: null,
         content: "",
+        path: "", // Reset path
       });
     } catch (error) {
       toast.error("Failed to create post");

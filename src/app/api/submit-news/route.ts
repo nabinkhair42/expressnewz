@@ -3,6 +3,16 @@ import { connectToDatabase } from "@/lib/mongodb";
 import Post from "@/models/Post";
 import cloudinary from "@/lib/cloudinary";
 
+// Function to generate path from title
+const generatePathFromTitle = (title: string) => {
+  return title
+    .split(" ") // Split title into words
+    .slice(0, 10) // Take first 10 words
+    .join("-") // Join words with hyphens
+    .replace(/[^\u0900-\u097F\w-]+/g, "") // Remove non-Nepali, non-alphanumeric characters except hyphens
+    .toLowerCase(); // Convert to lowercase for consistency
+};
+
 export async function GET() {
   await connectToDatabase();
 
@@ -20,6 +30,9 @@ export async function POST(request: Request) {
   const categories = JSON.parse(formData.get("categories") as string);
   const content = formData.get("content") as string;
   const image = formData.get("image") as File;
+
+  // Generate path from title
+  const path = `/news/${generatePathFromTitle(title)}`;
 
   let imagePath = ""; // Default to empty string if no image is provided
   if (image) {
@@ -50,6 +63,7 @@ export async function POST(request: Request) {
     categories,
     image: imagePath,
     content,
+    path, // Add path to the post data
   });
 
   await newPost.save();

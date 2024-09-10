@@ -1,3 +1,5 @@
+// /src/models/Post.ts
+
 import mongoose, { Document, Schema } from "mongoose";
 
 interface IPost extends Document {
@@ -7,6 +9,7 @@ interface IPost extends Document {
   categories: string[];
   image: string;
   content: string;
+  path: string;
 }
 
 const PostSchema: Schema = new Schema({
@@ -16,6 +19,7 @@ const PostSchema: Schema = new Schema({
   categories: [{ type: String }],
   image: { type: String, required: false }, // Make image optional
   content: { type: String, required: true },
+  path: { type: String, required: true, unique: true },
 });
 
 const Post = mongoose.models.Post || mongoose.model<IPost>("Post", PostSchema);

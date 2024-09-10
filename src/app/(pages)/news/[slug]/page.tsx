@@ -1,44 +1,45 @@
-// src/app/news/posts/[slug]/page.tsx
-import fs from "fs";
-import path from "path";
-import matter from "gray-matter";
-import { markdownToHtml } from "@/lib/blogmarkdownToHtml";
+//@ts-nocheck
+
 import { notFound } from "next/navigation";
 import { Avatar, Chip } from "@nextui-org/react";
 import Link from "next/link";
 import { ShareMenu } from "@/components/reusable/share";
 import RelatedPost from "@/components/widgets/RelatedPost";
 import AboveRelatedPost from "@/components/adsLayout/aboveRelatedPost";
+import { markdownToHtml } from "@/lib/markdownToHtml";
+import { MongoClient } from "mongodb";
 
-type Post = {
-  slug: string;
-  title: string;
-  date: string;
-  author: string;
-  content: string;
-  image: string;
-  categories: string[];
+// Function to fetch the post data from MongoDB
+const fetchPost = async (slug: string) => {
+  const decodedSlug = decodeURIComponent(slug);
+
+  const client = await MongoClient.connect(process.env.MONGODB_URI || "", {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
+  const db = client.db();
+  const post = await db
+    .collection("posts")
+    .findOne({ path: `/news/${decodedSlug}` });
+  client.close();
+
+  if (!post) {
+    return null;
+  }
+
+  return JSON.parse(JSON.stringify(post));
 };
 
 const BlogPost = async ({ params }: { params: { slug: string } }) => {
-  const { slug } = params;
+  // Fetch the post data based on the path
+  const post = await fetchPost(params.slug);
 
-  if (typeof slug !== "string") {
+  if (!post) {
     notFound();
   }
 
-  const filePath = `${slug}.md`;
-  const fullPath = path.join(process.cwd(), "src/data/news", filePath);
-  const fileExists = fs.existsSync(fullPath);
-
-  if (!fileExists) {
-    notFound();
-  }
-
-  const fileContents = fs.readFileSync(fullPath, "utf8");
-  const { data, content } = matter(fileContents);
-
-  const htmlContent = await markdownToHtml(filePath);
+  // Convert markdown content to HTML if necessary
+  const htmlContent = await markdownToHtml(post.content);
 
   return (
     <div className="mx-auto">
@@ -47,34 +48,36 @@ const BlogPost = async ({ params }: { params: { slug: string } }) => {
           className="bg-cover bg-center text-center overflow-hidden"
           style={{
             minHeight: "500px",
-            backgroundImage: `url(${data.image})`,
+            backgroundImage: `url(${post.image})`,
           }}
-          title={data.title}
+          title={post.title}
         ></div>
 
         <div className="max-w-3xl mx-auto">
           <div className="rounded-t-md bg-background -mt-32 px-5 sm:px-10 border py-10">
-            <h1 className="font-bold text-[30px] mb-2">{data.title}</h1>
+            <h1 className="font-bold text-[30px] mb-2">{post.title}</h1>
 
             {/* Author Details */}
-            <div className="flex md:justify-between md:items-center items-start  justify-start  flex-col md:flex-row">
+            <div className="flex md:justify-between md:items-center items-start justify-start flex-col md:flex-row">
               <div className="flex gap-2 items-center justify-center">
                 <Avatar
                   src="/author/author.jpg"
-                  alt={data.author}
+                  alt={post.author}
                   size="sm"
                   isBordered={true}
                   className="inline-block ml-2 border border-orange-400 h-12 w-12"
                 />
-                <div className="flex flex-col justify-start items-start gap-1 ">
-                  <p>{data.author}</p>
-                  <p className="text-muted-foreground">{data.date}</p>
+                <div className="flex flex-col justify-start items-start gap-1">
+                  <p>{post.author}</p>
+                  <p className="text-muted-foreground">{post.date}</p>
                 </div>
               </div>
               <ShareMenu />
             </div>
+
             {/* Advertise */}
             <AboveRelatedPost />
+
             {/* Complete News Goes Here */}
             <p className="leading-8 text-[20px] text-justify mt-4">
               <div
@@ -85,10 +88,10 @@ const BlogPost = async ({ params }: { params: { slug: string } }) => {
             </p>
 
             {/* Categories Displayed */}
-            {data.categories && data.categories.length > 0 && (
+            {post.categories && post.categories.length > 0 && (
               <div className="mt-8">
                 <div className="flex gap-2 md:flex-row flex-col">
-                  {data.categories.map((category: string, index: number) => (
+                  {post.categories.map((category, index) => (
                     <p key={index} className="text-primary">
                       <Link href={`/categories/${category.toLowerCase()}`}>
                         <Chip color="primary" className="px-2 py-1">
@@ -108,7 +111,7 @@ const BlogPost = async ({ params }: { params: { slug: string } }) => {
       <AboveRelatedPost />
 
       {/* Related Posts */}
-      {data.categories && <RelatedPost categories={data.categories} />}
+      {post.categories && <RelatedPost categories={post.categories} />}
     </div>
   );
 };

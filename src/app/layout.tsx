@@ -35,7 +35,7 @@ export default function RootLayout({
         disableTransitionOnChange
       >
         <body className={inter.className} suppressHydrationWarning={true}>
-          <AdPopup />
+          {/* <AdPopup /> */}
           <NavigationBar />
           {/* <DateTemperature /> */}
           <SmoothScrolling>

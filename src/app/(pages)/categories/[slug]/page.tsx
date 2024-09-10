@@ -1,19 +1,17 @@
-// // src/app/(pages)/news/[slug]/page.tsx
-import fs from "fs";
-import path from "path";
-import matter from "gray-matter";
+// src/app/(pages)/categories/[slug]/page.tsx
+import { notFound } from "next/navigation";
 import Link from "next/link";
 import {
   Card,
-  CardContent,
   CardDescription,
   CardTitle,
   CardHeader,
   CardFooter,
 } from "@/components/ui/card";
-import { Clock12, PenIcon, UserRoundPen } from "lucide-react";
+import { Clock12, UserRoundPen } from "lucide-react";
 import Image from "next/image";
 
+// Define the Post type
 type Post = {
   slug: string;
   title: string;
@@ -21,56 +19,58 @@ type Post = {
   categories: string[];
   author: string;
   image: string;
+  path: string;
 };
 
 const fetchPosts = async (): Promise<Post[]> => {
-  const newsDirectory = path.join(process.cwd(), "src/data/news");
-  const fileNames = fs.readdirSync(newsDirectory);
-
-  const posts: Post[] = fileNames.map((fileName) => {
-    const fullPath = path.join(newsDirectory, fileName);
-    const fileContents = fs.readFileSync(fullPath, "utf8");
-    const { data } = matter(fileContents);
-
-    return {
-      slug: fileName.replace(/\.md$/, ""),
-      image: data.image || "", // Add image field
-      title: data.title || "Untitled",
-      date: data.date || "",
-      categories: data.categories || [], // Default categories
-      author: data.author || "Express Newz", // Default author
-    };
-  });
-
-  return posts;
+  const baseUrl = "http://localhost:3000";
+  const response = await fetch(`${baseUrl}/api/posts`, { cache: "no-store" });
+  if (!response.ok) {
+    throw new Error("Network response was not ok");
+  }
+  return response.json();
 };
 
-const BlogPost = async ({ params }: { params: { slug: string } }) => {
+// The main component
+const CategoryPage = async ({ params }: { params: { slug: string } }) => {
   const { slug } = params;
 
-  const posts = await fetchPosts();
+  let posts: Post[] = [];
 
-  const newPosts = posts.filter((p) =>
-    p.categories.includes(slug.toLowerCase())
+  try {
+    posts = await fetchPosts();
+  } catch (error) {
+    console.error("Failed to fetch posts:", error);
+    return <p>Error loading posts.</p>;
+  }
+
+  // Filter posts by category
+  const categoryPosts = posts.filter((p) =>
+    p.categories.map((c) => c.toLowerCase()).includes(slug.toLowerCase())
   );
+
+  if (categoryPosts.length === 0) {
+    notFound();
+  }
+
   return (
     <div className="flex flex-col gap-8">
       <h1 className="text-5xl text-primary font-extrabold text-center outline-dotted">
         {slug.charAt(0).toUpperCase() + slug.slice(1)} News
       </h1>
       <ul className="grid grid-cols-[repeat(auto-fill,_minmax(250px,_1fr))] gap-4">
-        {newPosts.map((post) => (
+        {categoryPosts.map((post) => (
           <Card
             key={post.slug}
             className="hover:shadow-lg transition-shadow bg-inherit flex flex-col bg-background rounded-lg overflow-hidden border-none shadow-none"
           >
-            <Link href={`/news/${post.slug}`} className="flex flex-col h-full">
+            <Link href={post.path} className="flex flex-col h-full">
               <CardHeader className="relative overflow-hidden h-40">
                 <Image
                   src={post.image}
                   alt={post.title}
-                  layout="fill"
-                  objectFit="cover"
+                  fill
+                  style={{ objectFit: "cover" }}
                   className="w-full h-full rounded-t-lg shadow-sm"
                 />
               </CardHeader>
@@ -83,7 +83,6 @@ const BlogPost = async ({ params }: { params: { slug: string } }) => {
                     <Clock12 size={16} />
                     {post.date}
                   </div>
-
                   <div className="flex items-center gap-2">
                     <UserRoundPen width={16} />
                     {post.author}
@@ -98,4 +97,4 @@ const BlogPost = async ({ params }: { params: { slug: string } }) => {
   );
 };
 
-export default BlogPost;
+export default CategoryPage;

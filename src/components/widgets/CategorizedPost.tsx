@@ -15,14 +15,18 @@ interface Post {
   categories: string[];
 }
 
+// Function to fetch posts based on the category
 const fetchPosts = async (category: string): Promise<Post[]> => {
-  const response = await fetch(`/api/posts?category=${category}`);
+  const response = await fetch(
+    `/api/posts?category=${encodeURIComponent(category)}`
+  );
   if (!response.ok) {
     throw new Error("Network response was not ok");
   }
   return response.json();
 };
 
+// Function to get a random selection of posts
 const getRandomPosts = (posts: Post[], numberOfPosts: number): Post[] => {
   const shuffled = posts.sort(() => 0.5 - Math.random());
   return shuffled.slice(0, numberOfPosts);
@@ -33,6 +37,7 @@ const CategorizedPost: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
+  // Fetch posts when component mounts
   useEffect(() => {
     const fetchAndSetPosts = async () => {
       try {
@@ -53,13 +58,15 @@ const CategorizedPost: React.FC = () => {
     fetchAndSetPosts();
   }, []);
 
-  if (loading)
-    return (
-      <p>
-        <TrendingPostSkeleton />
-      </p>
-    );
-  if (error) return <p>Error: {error}</p>;
+  // Display loading state
+  if (loading) {
+    return <TrendingPostSkeleton />;
+  }
+
+  // Display error state
+  if (error) {
+    return <p>Error: {error}</p>;
+  }
 
   return (
     <div className="flex flex-col p-4 pt-6 px-6 gap-4 xl:gap-6 w-full">
@@ -72,14 +79,14 @@ const CategorizedPost: React.FC = () => {
         <p>No posts available</p>
       ) : (
         posts.slice(0, 3).map((post) => (
-          <div key={post.slug}>
-            <Link href={post.path} className="flex flex-col gap-2 ">
+          <div key={post.slug} className="border-b pb-4 mb-4">
+            <Link href={post.path} className="flex flex-col gap-2">
               <h2 className="md:text-xl text-3xl font-bold hover:text-primary transition-colors">
                 {post.title}
               </h2>
               <div className="flex justify-start items-start gap-2">
                 <div className="text-muted-foreground flex flex-col gap-2 md:flex-row md:text-md text-lg">
-                  <div className="flex items-center gap-2 ">
+                  <div className="flex items-center gap-2">
                     <Clock12 size={16} />
                     <span>{post.date}</span>
                   </div>
@@ -89,7 +96,6 @@ const CategorizedPost: React.FC = () => {
                   </div>
                 </div>
               </div>
-              <Separator />
             </Link>
           </div>
         ))
