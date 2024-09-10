@@ -1,10 +1,10 @@
-// src/components/reusable/NewsCMS.tsx
 "use client";
 import React, { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
+import { Loader2, Plus, X } from "lucide-react";
 import {
   Select,
   SelectContent,
@@ -13,6 +13,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import toast from "react-hot-toast";
+import { Chip } from "@nextui-org/react";
 
 interface Post {
   title: string;
@@ -23,6 +24,16 @@ interface Post {
   content: string;
 }
 
+const predefinedCategories = [
+  "politics",
+  "technology",
+  "sports",
+  "agriculture",
+  "business",
+  "lifestyle",
+  "world",
+];
+
 const NewsCMS = () => {
   const [newPost, setNewPost] = useState<Post>({
     title: "",
@@ -32,6 +43,9 @@ const NewsCMS = () => {
     image: null,
     content: "",
   });
+  const [isLoading, setIsLoading] = useState(false);
+  const [customCategory, setCustomCategory] = useState("");
+  const [allCategories, setAllCategories] = useState(predefinedCategories);
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -41,7 +55,19 @@ const NewsCMS = () => {
   };
 
   const handleCategoryChange = (value: string) => {
-    setNewPost((prev) => ({ ...prev, categories: [value] }));
+    setNewPost((prev) => ({
+      ...prev,
+      categories: prev.categories.includes(value)
+        ? prev.categories
+        : [...prev.categories, value],
+    }));
+  };
+
+  const handleRemoveCategory = (category: string) => {
+    setNewPost((prev) => ({
+      ...prev,
+      categories: prev.categories.filter((cat) => cat !== category),
+    }));
   };
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -51,8 +77,20 @@ const NewsCMS = () => {
     }
   };
 
+  const handleAddCustomCategory = () => {
+    if (customCategory && !allCategories.includes(customCategory)) {
+      setAllCategories((prev) => [...prev, customCategory]);
+      setNewPost((prev) => ({
+        ...prev,
+        categories: [...prev.categories, customCategory],
+      }));
+      setCustomCategory("");
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsLoading(true);
     const formData = new FormData();
     for (const [key, value] of Object.entries(newPost)) {
       if (key === "categories") {
@@ -81,22 +119,24 @@ const NewsCMS = () => {
       });
     } catch (error) {
       toast.error("Failed to create post");
+    } finally {
+      setIsLoading(false);
     }
   };
 
   return (
     <div className="p-4">
-      <h1 className="text-2xl font-bold mb-4">News CMS</h1>
-
       <Card className="p-6">
         <CardHeader>
-          <CardTitle className="text-center mb-4">Create New Post</CardTitle>
+          <CardTitle className="text-center mb-4">
+            समाचार पोस्ट सिर्जना गर्नुहोस्
+          </CardTitle>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
             <Input
               name="title"
-              placeholder="Title"
+              placeholder="शीर्षक"
               value={newPost.title}
               onChange={handleInputChange}
               required
@@ -110,7 +150,7 @@ const NewsCMS = () => {
             />
             <Input
               name="author"
-              placeholder="Author"
+              placeholder="पत्रकार"
               value={newPost.author}
               onChange={handleInputChange}
               required
@@ -120,15 +160,42 @@ const NewsCMS = () => {
                 <SelectValue placeholder="Select category" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="politics">Politics</SelectItem>
-                <SelectItem value="technology">Technology</SelectItem>
-                <SelectItem value="sports">Sports</SelectItem>
-                <SelectItem value="agriculture">Agriculture</SelectItem>
-                <SelectItem value="business">Business</SelectItem>
-                <SelectItem value="lifestyle">Lifestyle</SelectItem>
-                <SelectItem value="world">World</SelectItem>
+                {allCategories.map((category) => (
+                  <SelectItem key={category} value={category}>
+                    {category}
+                  </SelectItem>
+                ))}
               </SelectContent>
             </Select>
+            <div className="flex flex-wrap gap-2">
+              {newPost.categories.map((category) => (
+                <Chip key={category}>
+                  {category}
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="ml-2 h-4 w-4 p-0"
+                    onClick={() => handleRemoveCategory(category)}
+                  >
+                    <X className="h-3 w-3" />
+                  </Button>
+                </Chip>
+              ))}
+            </div>
+            <div className="flex space-x-2">
+              <Input
+                placeholder="Add custom category"
+                value={customCategory}
+                onChange={(e) => setCustomCategory(e.target.value)}
+              />
+              <Button
+                type="button"
+                onClick={handleAddCustomCategory}
+                disabled={!customCategory}
+              >
+                <Plus className="h-4 w-4" />
+              </Button>
+            </div>
             <Input
               type="file"
               accept="image/*"
@@ -137,12 +204,21 @@ const NewsCMS = () => {
             />
             <Textarea
               name="content"
-              placeholder="Content"
+              placeholder="समाचार विवरण"
               value={newPost.content}
               onChange={handleInputChange}
               required
             />
-            <Button type="submit">Create Post</Button>
+            <Button type="submit" disabled={isLoading}>
+              {isLoading ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  Creating Post...
+                </>
+              ) : (
+                "Create Post"
+              )}
+            </Button>
           </form>
         </CardContent>
       </Card>
