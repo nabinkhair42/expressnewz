@@ -1,5 +1,6 @@
 "use client";
 import { Avatar, Divider } from "@nextui-org/react";
+import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { MajorPostLoading } from "@/components/skeletons/MajorPostLoading";
@@ -54,7 +55,6 @@ const TopLatestPost: React.FC = () => {
       {posts.length === 0 ? (
         <p>No posts available.</p>
       ) : (
-        // Only display the top 3 sorted posts
         posts.slice(0, 3).map((post, index) => (
           <div key={post.title} className="w-full pt-6">
             <Link href={post.path} className="flex flex-col gap-6">
@@ -79,13 +79,13 @@ const TopLatestPost: React.FC = () => {
 
               {/* Add Image for Last Post only */}
               {index === 2 && (
-                <div className="flex items-center justify-center">
-                  <img
-                    src={post.image}
-                    alt="image"
-                    className="w-full h-96 object-cover rounded-sm"
-                  />
-                </div>
+                <Image
+                  src={post.image}
+                  alt="image"
+                  width={500}
+                  height={500}
+                  className="w-full h-96 object-cover rounded-sm"
+                />
               )}
               <Separator />
             </Link>
