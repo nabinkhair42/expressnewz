@@ -13,9 +13,18 @@ import {
 } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 
+interface Post {
+  title: string;
+  date: string;
+  author: string;
+  categories: string[];
+  image: File | null;
+  content: string;
+}
+
 const NewsCMS = () => {
-  const [posts, setPosts] = useState([]);
-  const [newPost, setNewPost] = useState({
+  const [posts, setPosts] = useState<Post[]>([]);
+  const [newPost, setNewPost] = useState<Post>({
     title: "",
     date: "",
     author: "",
@@ -56,8 +65,9 @@ const NewsCMS = () => {
   };
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      setNewPost((prev) => ({ ...prev, image: e.target.files[0] }));
+    const files = e.target.files;
+    if (files && files.length > 0) {
+      setNewPost((prev) => ({ ...prev, image: files[0] }));
     }
   };
 
