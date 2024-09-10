@@ -1,36 +1,18 @@
-// app/api/submit-news/route.ts
 import { NextResponse } from "next/server";
-import fs from "fs";
-import path from "path";
-import matter from "gray-matter";
-
-const postsDirectory = path.join(process.cwd(), "src/data/news");
-const imagesDirectory = path.join(process.cwd(), "public/images");
-
-function getNextPostNumber() {
-  const files = fs.readdirSync(postsDirectory);
-  const postNumbers = files
-    .filter((file) => file.startsWith("post") && file.endsWith(".md"))
-    .map((file) => parseInt(file.replace("post", "").replace(".md", "")));
-  return Math.max(17, ...postNumbers) + 1;
-}
+import { connectToDatabase } from "@/lib/mongodb";
+import Post from "@/models/Post";
+import cloudinary from "@/lib/cloudinary";
 
 export async function GET() {
-  const fileNames = fs.readdirSync(postsDirectory);
-  const posts = fileNames.map((fileName) => {
-    const fullPath = path.join(postsDirectory, fileName);
-    const fileContents = fs.readFileSync(fullPath, "utf8");
-    const { data, content } = matter(fileContents);
-    return {
-      slug: fileName.replace(/\.md$/, ""),
-      ...data,
-      content,
-    };
-  });
+  await connectToDatabase();
+
+  const posts = await Post.find({});
   return NextResponse.json(posts);
 }
 
 export async function POST(request: Request) {
+  await connectToDatabase();
+
   const formData = await request.formData();
   const title = formData.get("title") as string;
   const date = formData.get("date") as string;
@@ -39,34 +21,41 @@ export async function POST(request: Request) {
   const content = formData.get("content") as string;
   const image = formData.get("image") as File;
 
-  let imagePath = "";
+  let imagePath = ""; // Default to empty string if no image is provided
   if (image) {
     const imageBuffer = await image.arrayBuffer();
     const imageExt = image.name.split(".").pop();
-    imagePath = `/images/image${getNextPostNumber()}.${imageExt}`;
-    const fullImagePath = path.join(
-      imagesDirectory,
-      `image${getNextPostNumber()}.${imageExt}`
+
+    const uploadResult = await new Promise<{ secure_url: string }>(
+      (resolve, reject) => {
+        cloudinary.v2.uploader
+          .upload_stream(
+            { resource_type: "image", format: imageExt },
+            (error, result) => {
+              if (error) reject(error);
+              else resolve(result as { secure_url: string });
+            }
+          )
+          .end(Buffer.from(imageBuffer));
+      }
     );
-    fs.writeFileSync(fullImagePath, Buffer.from(imageBuffer));
+
+    imagePath = uploadResult.secure_url || "";
   }
 
-  const postNumber = getNextPostNumber();
-  const fileName = `post${postNumber}.md`;
-  const fullPath = path.join(postsDirectory, fileName);
+  const newPost = new Post({
+    title,
+    date,
+    author,
+    categories,
+    image: imagePath,
+    content,
+  });
 
-  const fileContent = `---
-title: "${title}"
-date: "${date}"
-author: "${author}"
-categories: ${JSON.stringify(categories)}
-image: "${imagePath}"
----
-${content}`;
+  await newPost.save();
 
-  fs.writeFileSync(fullPath, fileContent);
   return NextResponse.json(
-    { message: "Post created successfully", postNumber },
+    { message: "Post created successfully" },
     { status: 201 }
   );
 }
