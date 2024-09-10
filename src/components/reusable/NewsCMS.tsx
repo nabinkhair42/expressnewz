@@ -23,7 +23,6 @@ interface Post {
 }
 
 const NewsCMS = () => {
-  const [posts, setPosts] = useState<Post[]>([]);
   const [newPost, setNewPost] = useState<Post>({
     title: "",
     date: "",
@@ -32,21 +31,6 @@ const NewsCMS = () => {
     image: null,
     content: "",
   });
-
-  useEffect(() => {
-    fetchPosts();
-  }, []);
-
-  const fetchPosts = async () => {
-    try {
-      const response = await fetch("/api/submit-news");
-      if (!response.ok) throw new Error("Failed to fetch posts");
-      const data = await response.json();
-      setPosts(data);
-    } catch (error) {
-      toast.error("Failed to fetch posts");
-    }
-  };
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -85,7 +69,7 @@ const NewsCMS = () => {
       if (!response.ok) throw new Error("Failed to create post");
       const data = await response.json();
       toast.success("Post created successfully");
-      fetchPosts();
+
       setNewPost({
         title: "",
         date: "",
@@ -138,9 +122,18 @@ const NewsCMS = () => {
                 <SelectItem value="politics">Politics</SelectItem>
                 <SelectItem value="technology">Technology</SelectItem>
                 <SelectItem value="sports">Sports</SelectItem>
+                <SelectItem value="agriculture">Agriculture</SelectItem>
+                <SelectItem value="business">Business</SelectItem>
+                <SelectItem value="lifestyle">Lifestyle</SelectItem>
+                <SelectItem value="world">World</SelectItem>
               </SelectContent>
             </Select>
-            <Input type="file" accept="image/*" onChange={handleImageUpload} />
+            <Input
+              type="file"
+              accept="image/*"
+              onChange={handleImageUpload}
+              className="p-2"
+            />
             <Textarea
               name="content"
               placeholder="Content"
