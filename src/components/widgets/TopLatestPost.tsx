@@ -30,10 +30,11 @@ const TopLatestPost: React.FC = () => {
         }
         const data: Post[] = await response.json();
 
+        // Sort posts by date, latest first
         const sortedPosts = data.sort((a, b) => {
-          const numA = parseInt(a.path.replace(/\D/g, ""), 10);
-          const numB = parseInt(b.path.replace(/\D/g, ""), 10);
-          return numB - numA;
+          const dateA = new Date(a.date);
+          const dateB = new Date(b.date);
+          return dateB.getTime() - dateA.getTime(); // Latest date first
         });
 
         setPosts(sortedPosts);
