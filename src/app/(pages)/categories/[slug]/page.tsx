@@ -23,7 +23,7 @@ type Post = {
 };
 
 const fetchPosts = async (): Promise<Post[]> => {
-  const baseUrl = "http://localhost:3000";
+  const baseUrl = "https://expressnewz.vercel.app";
   const response = await fetch(`${baseUrl}/api/posts`, { cache: "no-store" });
   if (!response.ok) {
     throw new Error("Network response was not ok");
