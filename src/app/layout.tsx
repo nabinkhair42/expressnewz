@@ -16,9 +16,9 @@ const inter = Mukta({
 });
 
 export const metadata: Metadata = {
-  title: "Express Newz: Fun, Relaxed and Unbiased",
+  title: "Birat Express: Fun, Relaxed and Unbiased",
   description:
-    "Express Newz is a fun, relaxed and unbiased news source. Nepal and the world, we cover it all.",
+    "Birat Express is a fun, relaxed and unbiased news source. Nepal and the world, we cover it all.",
 };
 
 export default function RootLayout({

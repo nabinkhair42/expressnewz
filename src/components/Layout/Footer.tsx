@@ -57,7 +57,7 @@ const Footer: React.FC = () => {
       <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-y-12 gap-x-12">
           <div>
-            <h1 className="text-2xl font-bold">Express Newz</h1>
+            <h1 className="text-2xl font-bold">Birat Express</h1>
 
             <ul className="mt-8 space-y-4">
               {aboutLinks.map((link) => (
@@ -146,7 +146,8 @@ const Footer: React.FC = () => {
             </div>
 
             <p className="mt-6 text-sm lg:mt-0">
-              © Copyright {""} {new Date().getFullYear()} All Rights Reserved by Express Newz
+              © Copyright {""} {new Date().getFullYear()} All Rights Reserved by
+              Birat Express
             </p>
           </div>
         </div>

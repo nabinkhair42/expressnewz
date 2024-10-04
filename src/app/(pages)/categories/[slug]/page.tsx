@@ -41,7 +41,7 @@ const CategoryPage = async ({ params }: { params: { slug: string } }) => {
     posts = await fetchPosts();
   } catch (error) {
     console.error("Failed to fetch posts:", error);
-    return <p>Error loading posts.</p>;
+    return <p>No Post added in this categories.</p>;
   }
 
   // Filter posts by category

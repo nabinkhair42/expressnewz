@@ -110,7 +110,7 @@ const NavigationMenu = () => {
             <AlignLeft />
           </Button>
           <Link href="/" className="flex flex-col items-start">
-            <p className="font-bold text-3xl text-orange-400">Express Newz</p>
+            <p className="font-bold text-3xl text-orange-400">Birat Express</p>
             <span className="text-xl">रमाईलो, आराम र निष्पक्ष</span>
           </Link>
         </div>
@@ -145,7 +145,11 @@ const NavigationMenu = () => {
           >
             <Weather />
           </div>
-          <Button onClick={notify} className="hidden xl:flex" variant={"outline"}>
+          <Button
+            onClick={notify}
+            className="hidden xl:flex"
+            variant={"outline"}
+          >
             Sign In
           </Button>
           <Button
@@ -175,7 +179,7 @@ const NavigationMenu = () => {
             <div className="flex justify-between items-center pl-8 border-b h-20">
               <Link href="/" className="flex flex-col items-start">
                 <p className="font-bold text-3xl  text-orange-400">
-                  Express Newz
+                  Birat Express
                 </p>
                 <span className="text-xl">रमाईलो, आराम र निष्पक्ष</span>
               </Link>

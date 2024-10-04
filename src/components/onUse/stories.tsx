@@ -229,7 +229,7 @@ export const BlurImage = ({
       loading="lazy"
       decoding="async"
       blurDataURL={typeof src === "string" ? src : undefined}
-      alt={alt || "Express Newz"}
+      alt={alt || "Birat Express"}
       {...rest}
     />
   );
